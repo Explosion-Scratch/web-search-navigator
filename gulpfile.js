@@ -19,7 +19,7 @@ const extraFiles = [
 
 exports.default = () => {
   return gulp
-      .src(extraFiles)
-      .pipe(gulpif(argv.env === 'production', terser()))
-      .pipe(gulp.dest('./src'));
+    .src(extraFiles)
+    .pipe(gulpif(argv.env === 'production', terser()))
+    .pipe(gulp.dest('./src'));
 };

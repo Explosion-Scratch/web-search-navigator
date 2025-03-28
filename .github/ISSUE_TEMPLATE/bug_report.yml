@@ -1,7 +1,7 @@
 name: Bug Report
 description: File a bug report
-title: "[Bug]: "
-labels: ["bug"]
+title: '[Bug]: '
+labels: ['bug']
 body:
   - type: markdown
     attributes:
@@ -61,8 +61,8 @@ body:
       label: Troubleshooting result
       description: Please confirm that you followed the troubleshooting section
       options:
-      - label: I have followed the troubleshooting section
-        required: true
+        - label: I have followed the troubleshooting section
+          required: true
   - type: textarea
     id: anything-else
     attributes:

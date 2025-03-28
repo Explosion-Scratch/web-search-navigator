@@ -49,11 +49,11 @@ class SearchResult {
    * @param {function|null} containerSelector
    */
   constructor(
-      element,
-      anchorSelector,
-      highlightClass,
-      highlightedElementSelector,
-      containerSelector,
+    element,
+    anchorSelector,
+    highlightClass,
+    highlightedElementSelector,
+    containerSelector,
   ) {
     this.#element = element;
     this.#anchorSelector = anchorSelector;
@@ -89,8 +89,8 @@ class SearchResult {
  * @constructor
  */
 const getSortedSearchResults = (
-    includedSearchResults,
-    excludedNodeList = [],
+  includedSearchResults,
+  excludedNodeList = [],
 ) => {
   const excludedResultsSet = new Set();
   for (const node of excludedNodeList) {
@@ -100,11 +100,11 @@ const getSortedSearchResults = (
   for (const results of includedSearchResults) {
     for (const node of results.nodes) {
       const searchResult = new SearchResult(
-          node,
-          results.anchorSelector,
-          results.highlightClass,
-          results.highlightedElementSelector,
-          results.containerSelector,
+        node,
+        results.anchorSelector,
+        results.highlightClass,
+        results.highlightedElementSelector,
+        results.containerSelector,
       );
       const anchor = searchResult.anchor;
       // Use offsetParent to exclude hidden elements, see:
@@ -196,8 +196,8 @@ class GoogleSearch {
   }
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('#searchform.minidiv'),
-        element,
+      document.querySelector('#searchform.minidiv'),
+      element,
     );
   }
   getBottomMargin(element) {
@@ -216,9 +216,9 @@ class GoogleSearch {
       return;
     }
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(true);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(true);
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -264,7 +264,7 @@ class GoogleSearch {
       // https://imgur.com/a/X9zyJ24
       {
         nodes: document.querySelectorAll(
-            '#botstuff a[href^="/search"][href*="start="] h3',
+          '#botstuff a[href^="/search"][href*="start="] h3',
         ),
         highlightClass: 'wsn-google-focused-link',
         anchorSelector: (n) => n.closest('a'),
@@ -329,8 +329,8 @@ class GoogleSearch {
       // TODO: add screenshot
       {
         nodes: document.querySelectorAll(
-            // eslint-disable-next-line max-len
-            '#search a:is([href*="ibp=htl;jobs"],[href*="htivrt=jobs"]) [role=heading][aria-level="2"]',
+          // eslint-disable-next-line max-len
+          '#search a:is([href*="ibp=htl;jobs"],[href*="htivrt=jobs"]) [role=heading][aria-level="2"]',
         ),
         anchorSelector: (n) => n.closest('a'),
         // highlightedElementSelector: (n) => n.closest('li'),
@@ -383,7 +383,7 @@ class GoogleSearch {
       // Twitter: https://imgur.com/a/fdI75JG
       {
         nodes: document.querySelectorAll(
-            '#search [data-init-vis=true] [role=heading]',
+          '#search [data-init-vis=true] [role=heading]',
         ),
         anchorSelector: nearestChildOrSiblingOrParentAnchor,
         highlightedElementSelector: nearestCardContainer,
@@ -399,7 +399,7 @@ class GoogleSearch {
       // Vertical video results: https://imgur.com/a/8fbPnvT
       {
         nodes: document.querySelectorAll(
-            '#search video-voyager a [role=heading]',
+          '#search video-voyager a [role=heading]',
         ),
         anchorSelector: nearestChildOrSiblingOrParentAnchor,
         containerSelector: nearestChildOrSiblingOrParentAnchor,
@@ -410,7 +410,7 @@ class GoogleSearch {
       // People also search for: https://imgur.com/a/QpCHKt0
       {
         nodes: document.querySelectorAll(
-            '#search g-scrolling-carousel g-inner-card a [role=heading]',
+          '#search g-scrolling-carousel g-inner-card a [role=heading]',
         ),
         anchorSelector: nearestChildOrSiblingOrParentAnchor,
         containerSelector: nearestCardContainer,
@@ -420,7 +420,7 @@ class GoogleSearch {
       // Vaccines: https://imgur.com/a/325qJzE
       {
         nodes: document.querySelectorAll(
-            '#search a.a-no-hover-decoration [role=heading]',
+          '#search a.a-no-hover-decoration [role=heading]',
         ),
         anchorSelector: nearestChildOrSiblingOrParentAnchor,
         containerSelector: nearestChildOrSiblingOrParentAnchor,
@@ -478,7 +478,7 @@ class GoogleSearch {
     return [
       {
         nodes: document.querySelectorAll(
-            '#memexResults ._3d3zwUrsb4CVi1Li4H6CBw a',
+          '#memexResults ._3d3zwUrsb4CVi1Li4H6CBw a',
         ),
         highlightClass: 'wsn-google-focused-memex-result',
       },
@@ -500,18 +500,18 @@ class GoogleSearch {
       includedElements.push(...GoogleSearch.#memexResults());
     }
     const excludedElements = document.querySelectorAll(
-        [
-          // People also ask. Each one of the used selectors should be
-          // sufficient, but we use both to be more robust to upstream DOM
-          // changes.
-          '.related-question-pair a',
-          '#search .kp-blk:not(.c2xzTb) .r > a:first-of-type',
-          // Right hand sidebar. We exclude it because it is after all the
-          // results in the document order (as determined by
-          // Node.DOCUMENT_POSITION_FOLLOWING used in getSortedSearchResults),
-          // and it's confusing.
-          '#rhs a',
-        ].join(', '),
+      [
+        // People also ask. Each one of the used selectors should be
+        // sufficient, but we use both to be more robust to upstream DOM
+        // changes.
+        '.related-question-pair a',
+        '#search .kp-blk:not(.c2xzTb) .r > a:first-of-type',
+        // Right hand sidebar. We exclude it because it is after all the
+        // results in the document order (as determined by
+        // Node.DOCUMENT_POSITION_FOLLOWING used in getSortedSearchResults),
+        // and it's confusing.
+        '#rhs a',
+      ].join(', '),
     );
     return getSortedSearchResults(includedElements, excludedElements);
   }
@@ -522,9 +522,9 @@ class GoogleSearch {
       return;
     }
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(true);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(true);
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -539,11 +539,11 @@ class GoogleSearch {
       return;
     }
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          if (document.querySelector('#memexResults') != null) {
-            callback(true);
-          }
-        }, 50),
+      debounce((mutationsList, observer) => {
+        if (document.querySelector('#memexResults') != null) {
+          callback(true);
+        }
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -562,21 +562,21 @@ class GoogleSearch {
     return {
       navigateSearchTab: visibleTabs[0],
       navigateMapsTab: selectorElementGetter(
-          '.T47uwc > a[href*="maps.google."]',
+        '.T47uwc > a[href*="maps.google."]',
       ),
       navigateVideosTab: selectorElementGetter('.T47uwc > a[href*="&tbm=vid"]'),
       navigateNewsTab: selectorElementGetter('.T47uwc > a[href*="&tbm=nws"]'),
       navigateShoppingTab: selectorElementGetter(
-          'a[role="menuitem"][href*="&tbm=shop"]',
+        'a[role="menuitem"][href*="&tbm=shop"]',
       ),
       navigateBooksTab: selectorElementGetter(
-          'a[role="menuitem"][href*="&tbm=bks"]',
+        'a[role="menuitem"][href*="&tbm=bks"]',
       ),
       navigateFlightsTab: selectorElementGetter(
-          'a[role="menuitem"][href*="&tbm=flm"]',
+        'a[role="menuitem"][href*="&tbm=flm"]',
       ),
       navigateFinancialTab: selectorElementGetter(
-          'a[role="menuitem"][href*="/finance?"]',
+        'a[role="menuitem"][href*="/finance?"]',
       ),
       // TODO: Disable image search's default keybindings to avoid confusing the
       // user, because the default keybindings can cause an indenepdent
@@ -615,8 +615,8 @@ class GoogleSearch {
     }
     return {
       navigateSearchTab: selectorElementGetter(
-          // eslint-disable-next-line max-len
-          'a[href*="/search?q="]:not([href*="&tbm="]):not([href*="maps.google."])',
+        // eslint-disable-next-line max-len
+        'a[href*="/search?q="]:not([href*="&tbm="]):not([href*="maps.google."])',
       ),
       navigateImagesTab: selectorElementGetter('a[href*="&tbm=isch"]'),
       navigateVideosTab: selectorElementGetter('a[href*="&tbm=vid"]'),
@@ -668,8 +668,8 @@ class GoogleSearch {
       // Can't apply sort when not using period.
     } else if (currentPeriod) {
       searchParams.set(
-          'tbs',
-          `${currentPeriod}` + (currentSort ? '' : ',sbd:1'),
+        'tbs',
+        `${currentPeriod}` + (currentSort ? '' : ',sbd:1'),
       );
     }
     const newSearchString = '?' + searchParams.toString();
@@ -681,12 +681,12 @@ class GoogleSearch {
 
   changeImageSize(size) {
     const sizeOptions = {
-      LARGE: {value: 0, name: 'Large', code: 'l'},
-      MEDIUM: {value: 1, name: 'Medium', code: 'e'},
-      ICON: {value: 2, name: 'Icon', code: 'i'},
+      LARGE: { value: 0, name: 'Large', code: 'l' },
+      MEDIUM: { value: 1, name: 'Medium', code: 'e' },
+      ICON: { value: 2, name: 'Icon', code: 'i' },
     };
     const openTool = document.querySelector(
-        '[class="PNyWAd ZXJQ7c"][jsname="I4bIT"]',
+      '[class="PNyWAd ZXJQ7c"][jsname="I4bIT"]',
     );
     if (openTool != null) {
       openTool.click();
@@ -696,7 +696,7 @@ class GoogleSearch {
       openSizeDropDown.click();
     }
     const dropDownWithSize = document.querySelector(
-        '[class="xFo9P r9PaP Fmo8N"][jsname="wLFV5d"]',
+      '[class="xFo9P r9PaP Fmo8N"][jsname="wLFV5d"]',
     );
     const getButton = (selector) => {
       let button;
@@ -726,8 +726,8 @@ class GoogleSearch {
           dropDownWithSize.getAttribute('aria-label') != sizeOptions.LARGE.name
         ) {
           setImageSize(
-              dropDownWithSize,
-              '[class="MfLWbb"][aria-label="Large"]',
+            dropDownWithSize,
+            '[class="MfLWbb"][aria-label="Large"]',
           );
         }
         break;
@@ -737,8 +737,8 @@ class GoogleSearch {
           dropDownWithSize.getAttribute('aria-label') != sizeOptions.MEDIUM.name
         ) {
           setImageSize(
-              dropDownWithSize,
-              '[class="MfLWbb"][aria-label="Medium"]',
+            dropDownWithSize,
+            '[class="MfLWbb"][aria-label="Medium"]',
           );
         }
         break;
@@ -771,17 +771,17 @@ class BraveSearch {
 
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('header.navbar'),
-        element,
+      document.querySelector('header.navbar'),
+      element,
     );
   }
 
   onChangedResults(callback) {
     const containers = document.querySelectorAll('#results');
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(true);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(true);
+      }, 50),
     );
     for (const container of containers) {
       observer.observe(container, {
@@ -831,14 +831,14 @@ class BraveSearch {
       // News cards
       {
         nodes: document.querySelectorAll(
-            '.card[data-type="news"]:nth-child(-n+3)',
+          '.card[data-type="news"]:nth-child(-n+3)',
         ),
         highlightClass: 'wsn-brave-search-focused-card',
       },
       // Video cards
       {
         nodes: document.querySelectorAll(
-            '.card[data-type="videos"]:nth-child(-n+3)',
+          '.card[data-type="videos"]:nth-child(-n+3)',
         ),
         highlightClass: 'wsn-brave-search-focused-card',
       },
@@ -855,11 +855,11 @@ class BraveSearch {
     return {
       navigateSearchTab: document.querySelector('a[href*="/search?q="]'),
       navigateImagesTab: document.querySelector(
-          '#tab-images > a:first-of-type',
+        '#tab-images > a:first-of-type',
       ),
       navigateNewsTab: document.querySelector('a[href*="/news?q="]'),
       navigateVideosTab: document.querySelector(
-          '#tab-videos > a:first-of-type',
+        '#tab-videos > a:first-of-type',
       ),
     };
   }
@@ -877,8 +877,8 @@ class StartPage {
   }
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('div.layout-web__header'),
-        element,
+      document.querySelector('div.layout-web__header'),
+      element,
     );
   }
   getBottomMargin(element) {
@@ -922,7 +922,7 @@ class StartPage {
       // As of 2020-06-20, this doesn't seem to match anything.
       {
         nodes: document.querySelectorAll(
-            '.vo-sp.vo-sp--default > a.vo-sp__link',
+          '.vo-sp.vo-sp--default > a.vo-sp__link',
         ),
         highlightedElementSelector: containerSelector,
         highlightClass: 'wsn-startpage-focused-link',
@@ -939,7 +939,7 @@ class StartPage {
     }
 
     return document.querySelector(
-        'form.pagination__form.next-prev-form--desktop:first-of-type',
+      'form.pagination__form.next-prev-form--desktop:first-of-type',
     );
   }
 
@@ -950,7 +950,7 @@ class StartPage {
     }
 
     return document.querySelector(
-        'form.pagination__form.next-prev-form--desktop:last-of-type',
+      'form.pagination__form.next-prev-form--desktop:last-of-type',
     );
   }
 
@@ -1009,8 +1009,8 @@ class YouTube {
   }
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('#masthead-container'),
-        element,
+      document.querySelector('#masthead-container'),
+      element,
     );
   }
 
@@ -1025,9 +1025,9 @@ class YouTube {
       'ytd-shelf-renderer',
     ].join(',');
     const resultsObserver = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(true);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(true);
+      }, 50),
     );
     let lastLoadedURL = null;
     const pageObserverCallback = (mutationsList, observer) => {
@@ -1057,7 +1057,7 @@ class YouTube {
     // (which is what happened in issue #337 [1]).
     // [1] https://github.com/infokiller/web-search-navigator/issues/337
     const pageObserver = new MutationObserver(
-        debounce(pageObserverCallback, 50),
+      debounce(pageObserverCallback, 50),
     );
     pageObserver.observe(document.querySelector('#page-manager'), {
       attributes: false,
@@ -1078,7 +1078,7 @@ class YouTube {
       // Playlist results in vertical search results: https://imgur.com/a/nPjGd9H
       {
         nodes: document.querySelectorAll(
-            'ytd-playlist-renderer a[href*="/playlist"]',
+          'ytd-playlist-renderer a[href*="/playlist"]',
         ),
         highlightClass: 'wsn-youtube-focused-video',
         highlightedElementSelector: (n) => n.closest('ytd-playlist-renderer'),
@@ -1100,7 +1100,7 @@ class YouTube {
       // Channels
       {
         nodes: document.querySelectorAll(
-            'ytd-grid-video-renderer a#video-title:not([aria-hidden="true"])',
+          'ytd-grid-video-renderer a#video-title:not([aria-hidden="true"])',
         ),
         highlightClass: 'wsn-youtube-focused-grid-video',
         highlightedElementSelector: (n) => n.closest('ytd-grid-video-renderer'),
@@ -1110,26 +1110,26 @@ class YouTube {
     // checking if homepage results are present
     const homePageElements = {
       nodes: document.querySelectorAll(
-          'ytd-rich-item-renderer a#video-title-link',
+        'ytd-rich-item-renderer a#video-title-link',
       ),
       highlightClass: 'wsn-youtube-focused-video',
       highlightedElementSelector: (n) => n.closest('ytd-rich-item-renderer'),
       containerSelector: (n) => n.closest('ytd-rich-item-renderer'),
     };
     const results = getSortedSearchResults(
-        [...includedElements, homePageElements],
-        [],
+      [...includedElements, homePageElements],
+      [],
     );
     // When navigating away from the home page, the home page elements are still
     // in the DOM but they are not visible, so we must check if they are
     // visible (using offsetParent), not just if they are present.
     const isHomePage = Array.from(homePageElements.nodes).some(
-        (n) => n.offsetParent != null,
+      (n) => n.offsetParent != null,
     );
     const gridRow = document.querySelector('ytd-rich-grid-row');
     if (isHomePage && gridRow != null) {
       results.itemsPerRow = gridRow.getElementsByTagName(
-          'ytd-rich-item-renderer',
+        'ytd-rich-item-renderer',
       ).length;
       results.gridNavigation = results.itemsPerRow > 0;
     }
@@ -1139,14 +1139,14 @@ class YouTube {
   changeTools(period) {
     if (!document.querySelector('div#collapse-content')) {
       const toggleButton = document.querySelectorAll(
-          'a.ytd-toggle-button-renderer',
+        'a.ytd-toggle-button-renderer',
       )[0];
       // Toggling the buttons ensures that div#collapse-content is loaded
       toggleButton.click();
       toggleButton.click();
     }
     const forms = document.querySelectorAll(
-        'div#collapse-content > *:first-of-type ytd-search-filter-renderer',
+      'div#collapse-content > *:first-of-type ytd-search-filter-renderer',
     );
     let neededForm = null;
     switch (period) {
@@ -1193,7 +1193,7 @@ class GoogleScholar {
       },
       {
         nodes: document.querySelectorAll(
-            '.gs_ico_nav_previous, .gs_ico_nav_next',
+          '.gs_ico_nav_previous, .gs_ico_nav_next',
         ),
         anchorSelector: (n) => n.parentElement,
         highlightClass: 'wsn-google-scholar-next-page',
@@ -1238,9 +1238,9 @@ class Amazon {
       return;
     }
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(false);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(false);
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -1254,7 +1254,7 @@ class Amazon {
       // Carousel items
       {
         nodes: document.querySelectorAll(
-            '.s-main-slot .a-carousel-card h2 .a-link-normal.a-text-normal',
+          '.s-main-slot .a-carousel-card h2 .a-link-normal.a-text-normal',
         ),
         highlightedElementSelector: (n) => n.closest('.a-carousel-card'),
         highlightClass: 'wsn-amazon-focused-carousel-item',
@@ -1265,7 +1265,7 @@ class Amazon {
       // more general.
       {
         nodes: document.querySelectorAll(
-            '.s-main-slot h2 .a-link-normal.a-text-normal',
+          '.s-main-slot h2 .a-link-normal.a-text-normal',
         ),
         // highlightedElementSelector: (n) => n.parentElement.children[1],
         highlightedElementSelector: (n) =>
@@ -1282,7 +1282,7 @@ class Amazon {
       // Shopping card items
       {
         nodes: document.querySelectorAll(
-            '.sc-list-item-content .a-list-item .a-link-normal',
+          '.sc-list-item-content .a-list-item .a-link-normal',
         ),
         highlightClass: 'wsn-amazon-focused-cart-item',
         highlightedElementSelector: (n) => n.closest('.sc-list-item-content'),
@@ -1293,7 +1293,7 @@ class Amazon {
     // TODO: The hidden carousel elements do not match at page load because
     // they don't yet have the aria-hidden property set.
     const excludedElements = document.querySelectorAll(
-        '.a-pagination .a-selected a, .a-carousel-card[aria-hidden="true"] a',
+      '.a-pagination .a-selected a, .a-carousel-card[aria-hidden="true"] a',
     );
     return getSortedSearchResults(includedElements, excludedElements);
   }
@@ -1323,7 +1323,7 @@ class Github {
 
   static #getCommitSearchLinks() {
     const commitsContainers = document.querySelectorAll(
-        '#commit_search_results .text-normal',
+      '#commit_search_results .text-normal',
     );
     const commits = [];
     for (const con of commitsContainers) {
@@ -1335,7 +1335,7 @@ class Github {
         commits.push(links[0]);
       } else {
         const prLink = con.querySelector(
-            'a[data-hovercard-type="pull_request"]',
+          'a[data-hovercard-type="pull_request"]',
         );
         if (prLink != null) {
           commits.push(prLink);
@@ -1366,21 +1366,21 @@ class Github {
       // Issues
       {
         nodes: document.querySelectorAll(
-            '#issue_search_results .text-normal a',
+          '#issue_search_results .text-normal a',
         ),
         highlightClass: 'wsn-github-focused-item',
       },
       // Marketplace
       {
         nodes: document.querySelectorAll(
-            '#marketplace_search_results .text-normal a',
+          '#marketplace_search_results .text-normal a',
         ),
         highlightClass: 'wsn-github-focused-item',
       },
       // Topics
       {
         nodes: document.querySelectorAll(
-            '#topic_search_results .text-normal a',
+          '#topic_search_results .text-normal a',
         ),
         highlightClass: 'wsn-github-focused-item',
       },
@@ -1397,7 +1397,7 @@ class Github {
       // Pinned repos in user profile
       {
         nodes: document.querySelectorAll(
-            '.pinned-item-list-item-content span.repo',
+          '.pinned-item-list-item-content span.repo',
         ),
         highlightClass: 'wsn-github-focused-item',
         highlightedElementSelector: (n) => n.closest('a'),
@@ -1407,7 +1407,7 @@ class Github {
       // Personal repos list in user profile
       {
         nodes: document.querySelectorAll(
-            '#user-repositories-list a[itemprop*="codeRepository"]',
+          '#user-repositories-list a[itemprop*="codeRepository"]',
         ),
         highlightClass: 'wsn-github-focused-item',
         containerSelector: (n) => n.closest('li') || n,
@@ -1447,14 +1447,14 @@ class Github {
     // next page of results).
     let lastURL = window.location.href;
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          let appendOnly = true;
-          if (window.location.href !== lastURL) {
-            lastURL = window.location.href;
-            appendOnly = false;
-          }
-          callback(appendOnly);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        let appendOnly = true;
+        if (window.location.href !== lastURL) {
+          lastURL = window.location.href;
+          appendOnly = false;
+        }
+        callback(appendOnly);
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -1485,14 +1485,14 @@ class Gitlab {
 
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('header.navbar'),
-        element,
+      document.querySelector('header.navbar'),
+      element,
     );
   }
 
   onChangedResults(callback) {
     const containers = document.querySelectorAll(
-        '.projects-list, .groups-list, #content-body',
+      '.projects-list, .groups-list, #content-body',
     );
     const observer = new MutationObserver(async (mutationsList, observer) => {
       callback(true);
@@ -1518,7 +1518,7 @@ class Gitlab {
       // https://gitlab.archlinux.org/archlinux
       {
         nodes: document.querySelectorAll(
-            'ul.groups-list li.group-row a[aria-label]',
+          'ul.groups-list li.group-row a[aria-label]',
         ),
         containerSelector: (n) => n.closest('li.group-row'),
         highlightedElementSelector: (n) => n.closest('li.group-row'),

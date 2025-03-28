@@ -1,1 +1,46 @@
-(function(a){var c={},d=a.prototype.stopCallback;a.prototype.stopCallback=function(e,b,a,f){return this.paused?!0:c[a]||c[f]?!1:d.call(this,e,b,a)};a.prototype.bindGlobal=function(a,b,d){this.bind(a,b,d);if(a instanceof Array)for(b=0;b<a.length;b++)c[a[b]]=!0;else c[a]=!0};a.init()})(Mousetrap);
+/**
+ * adds a bindGlobal method to Mousetrap that allows you to
+ * bind specific keyboard shortcuts that will still work
+ * inside a text input field
+ *
+ * usage:
+ * Mousetrap.bindGlobal('ctrl+s', _saveChanges);
+ */
+/* global Mousetrap:true */
+(function (Mousetrap) {
+  if (!Mousetrap) {
+    return;
+  }
+  var _globalCallbacks = {};
+  var _originalStopCallback = Mousetrap.prototype.stopCallback;
+
+  Mousetrap.prototype.stopCallback = function (e, element, combo, sequence) {
+    var self = this;
+
+    if (self.paused) {
+      return true;
+    }
+
+    if (_globalCallbacks[combo] || _globalCallbacks[sequence]) {
+      return false;
+    }
+
+    return _originalStopCallback.call(self, e, element, combo);
+  };
+
+  Mousetrap.prototype.bindGlobal = function (keys, callback, action) {
+    var self = this;
+    self.bind(keys, callback, action);
+
+    if (keys instanceof Array) {
+      for (var i = 0; i < keys.length; i++) {
+        _globalCallbacks[keys[i]] = true;
+      }
+      return;
+    }
+
+    _globalCallbacks[keys] = true;
+  };
+
+  Mousetrap.init();
+})(typeof Mousetrap !== 'undefined' ? Mousetrap : undefined);

@@ -448,7 +448,10 @@ globalThis._browser_userscript_polyfill = {
     },
     id: '093889f3-43be-45e3-bc5a-e257e75b466d',
   },
-  storage: {sync: globalThis._localStorage_browser_polyfill, local: globalThis._localStorage_browser_polyfill},
+  storage: {
+    sync: globalThis._localStorage_browser_polyfill,
+    local: globalThis._localStorage_browser_polyfill,
+  },
   permissions: {
     remove: () => {},
     add: () => {},
@@ -457,8 +460,491 @@ globalThis._browser_userscript_polyfill = {
   },
 };
 console.log(globalThis.browser, _browser_userscript_polyfill);
-Object.assign(globalThis, {browser: globalThis._browser_userscript_polyfill, chrome: globalThis._browser_userscript_polyfill});
-(function(a,b){if("function"==typeof define&&define.amd)define("webextension-polyfill",["module"],b);else if("undefined"!=typeof exports)b(module);else{var c={exports:{}};b(c),a.browser=c.exports}})("undefined"==typeof globalThis?"undefined"==typeof self?this:self:globalThis,function(a){"use strict";if(!(globalThis.chrome&&globalThis.chrome.runtime&&globalThis.chrome.runtime.id))throw new Error("This script should only be loaded in a browser extension.");if(!(globalThis.browser&&globalThis.browser.runtime&&globalThis.browser.runtime.id)){a.exports=(a=>{const b={alarms:{clear:{minArgs:0,maxArgs:1},clearAll:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getAll:{minArgs:0,maxArgs:0}},bookmarks:{create:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},getChildren:{minArgs:1,maxArgs:1},getRecent:{minArgs:1,maxArgs:1},getSubTree:{minArgs:1,maxArgs:1},getTree:{minArgs:0,maxArgs:0},move:{minArgs:2,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeTree:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}},browserAction:{disable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},enable:{minArgs:0,maxArgs:1,fallbackToNoCallback:!0},getBadgeBackgroundColor:{minArgs:1,maxArgs:1},getBadgeText:{minArgs:1,maxArgs:1},getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},openPopup:{minArgs:0,maxArgs:0},setBadgeBackgroundColor:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setBadgeText:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},browsingData:{remove:{minArgs:2,maxArgs:2},removeCache:{minArgs:1,maxArgs:1},removeCookies:{minArgs:1,maxArgs:1},removeDownloads:{minArgs:1,maxArgs:1},removeFormData:{minArgs:1,maxArgs:1},removeHistory:{minArgs:1,maxArgs:1},removeLocalStorage:{minArgs:1,maxArgs:1},removePasswords:{minArgs:1,maxArgs:1},removePluginData:{minArgs:1,maxArgs:1},settings:{minArgs:0,maxArgs:0}},commands:{getAll:{minArgs:0,maxArgs:0}},contextMenus:{remove:{minArgs:1,maxArgs:1},removeAll:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},cookies:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:1,maxArgs:1},getAllCookieStores:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},devtools:{inspectedWindow:{eval:{minArgs:1,maxArgs:2,singleCallbackArg:!1}},panels:{create:{minArgs:3,maxArgs:3,singleCallbackArg:!0},elements:{createSidebarPane:{minArgs:1,maxArgs:1}}}},downloads:{cancel:{minArgs:1,maxArgs:1},download:{minArgs:1,maxArgs:1},erase:{minArgs:1,maxArgs:1},getFileIcon:{minArgs:1,maxArgs:2},open:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},pause:{minArgs:1,maxArgs:1},removeFile:{minArgs:1,maxArgs:1},resume:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},extension:{isAllowedFileSchemeAccess:{minArgs:0,maxArgs:0},isAllowedIncognitoAccess:{minArgs:0,maxArgs:0}},history:{addUrl:{minArgs:1,maxArgs:1},deleteAll:{minArgs:0,maxArgs:0},deleteRange:{minArgs:1,maxArgs:1},deleteUrl:{minArgs:1,maxArgs:1},getVisits:{minArgs:1,maxArgs:1},search:{minArgs:1,maxArgs:1}},i18n:{detectLanguage:{minArgs:1,maxArgs:1},getAcceptLanguages:{minArgs:0,maxArgs:0}},identity:{launchWebAuthFlow:{minArgs:1,maxArgs:1}},idle:{queryState:{minArgs:1,maxArgs:1}},management:{get:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},getSelf:{minArgs:0,maxArgs:0},setEnabled:{minArgs:2,maxArgs:2},uninstallSelf:{minArgs:0,maxArgs:1}},notifications:{clear:{minArgs:1,maxArgs:1},create:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:0},getPermissionLevel:{minArgs:0,maxArgs:0},update:{minArgs:2,maxArgs:2}},pageAction:{getPopup:{minArgs:1,maxArgs:1},getTitle:{minArgs:1,maxArgs:1},hide:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setIcon:{minArgs:1,maxArgs:1},setPopup:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},setTitle:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0},show:{minArgs:1,maxArgs:1,fallbackToNoCallback:!0}},permissions:{contains:{minArgs:1,maxArgs:1},getAll:{minArgs:0,maxArgs:0},remove:{minArgs:1,maxArgs:1},request:{minArgs:1,maxArgs:1}},runtime:{getBackgroundPage:{minArgs:0,maxArgs:0},getPlatformInfo:{minArgs:0,maxArgs:0},openOptionsPage:{minArgs:0,maxArgs:0},requestUpdateCheck:{minArgs:0,maxArgs:0},sendMessage:{minArgs:1,maxArgs:3},sendNativeMessage:{minArgs:2,maxArgs:2},setUninstallURL:{minArgs:1,maxArgs:1}},sessions:{getDevices:{minArgs:0,maxArgs:1},getRecentlyClosed:{minArgs:0,maxArgs:1},restore:{minArgs:0,maxArgs:1}},storage:{local:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}},managed:{get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1}},sync:{clear:{minArgs:0,maxArgs:0},get:{minArgs:0,maxArgs:1},getBytesInUse:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}}},tabs:{captureVisibleTab:{minArgs:0,maxArgs:2},create:{minArgs:1,maxArgs:1},detectLanguage:{minArgs:0,maxArgs:1},discard:{minArgs:0,maxArgs:1},duplicate:{minArgs:1,maxArgs:1},executeScript:{minArgs:1,maxArgs:2},get:{minArgs:1,maxArgs:1},getCurrent:{minArgs:0,maxArgs:0},getZoom:{minArgs:0,maxArgs:1},getZoomSettings:{minArgs:0,maxArgs:1},goBack:{minArgs:0,maxArgs:1},goForward:{minArgs:0,maxArgs:1},highlight:{minArgs:1,maxArgs:1},insertCSS:{minArgs:1,maxArgs:2},move:{minArgs:2,maxArgs:2},query:{minArgs:1,maxArgs:1},reload:{minArgs:0,maxArgs:2},remove:{minArgs:1,maxArgs:1},removeCSS:{minArgs:1,maxArgs:2},sendMessage:{minArgs:2,maxArgs:3},setZoom:{minArgs:1,maxArgs:2},setZoomSettings:{minArgs:1,maxArgs:2},update:{minArgs:1,maxArgs:2}},topSites:{get:{minArgs:0,maxArgs:0}},webNavigation:{getAllFrames:{minArgs:1,maxArgs:1},getFrame:{minArgs:1,maxArgs:1}},webRequest:{handlerBehaviorChanged:{minArgs:0,maxArgs:0}},windows:{create:{minArgs:0,maxArgs:1},get:{minArgs:1,maxArgs:2},getAll:{minArgs:0,maxArgs:1},getCurrent:{minArgs:0,maxArgs:1},getLastFocused:{minArgs:0,maxArgs:1},remove:{minArgs:1,maxArgs:1},update:{minArgs:2,maxArgs:2}}};if(0===Object.keys(b).length)throw new Error("api-metadata.json has not been included in browser-polyfill");class c extends WeakMap{constructor(a,b=void 0){super(b),this.createItem=a}get(a){return this.has(a)||this.set(a,this.createItem(a)),super.get(a)}}const d=a=>a&&"object"==typeof a&&"function"==typeof a.then,e=(b,c)=>(...d)=>{a.runtime.lastError?b.reject(new Error(a.runtime.lastError.message)):c.singleCallbackArg||1>=d.length&&!1!==c.singleCallbackArg?b.resolve(d[0]):b.resolve(d)},f=a=>1==a?"argument":"arguments",g=(a,b)=>function(c,...d){if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((f,g)=>{if(b.fallbackToNoCallback)try{c[a](...d,e({resolve:f,reject:g},b))}catch(e){console.warn(`${a} API method doesn't seem to support the callback parameter, `+"falling back to call it without a callback: ",e),c[a](...d),b.fallbackToNoCallback=!1,b.noCallback=!0,f()}else b.noCallback?(c[a](...d),f()):c[a](...d,e({resolve:f,reject:g},b))})},h=(a,b,c)=>new Proxy(b,{apply(b,d,e){return c.call(d,a,...e)}});let i=Function.call.bind(Object.prototype.hasOwnProperty);const j=(a,b={},c={})=>{let d=Object.create(null),e=Object.create(a);return new Proxy(e,{has(b,c){return c in a||c in d},get(e,f){if(f in d)return d[f];if(!(f in a))return;let k=a[f];if("function"==typeof k){if("function"==typeof b[f])k=h(a,a[f],b[f]);else if(i(c,f)){let b=g(f,c[f]);k=h(a,a[f],b)}else k=k.bind(a);}else if("object"==typeof k&&null!==k&&(i(b,f)||i(c,f)))k=j(k,b[f],c[f]);else if(i(c,"*"))k=j(k,b[f],c["*"]);else return Object.defineProperty(d,f,{configurable:!0,enumerable:!0,get(){return a[f]},set(b){a[f]=b}}),k;return d[f]=k,k},set(b,c,e){return c in d?d[c]=e:a[c]=e,!0},defineProperty(a,b,c){return Reflect.defineProperty(d,b,c)},deleteProperty(a,b){return Reflect.deleteProperty(d,b)}})},k=a=>({addListener(b,c,...d){b.addListener(a.get(c),...d)},hasListener(b,c){return b.hasListener(a.get(c))},removeListener(b,c){b.removeListener(a.get(c))}}),l=new c(a=>"function"==typeof a?function(b){const c=j(b,{},{getContent:{minArgs:0,maxArgs:0}});a(c)}:a),m=new c(a=>"function"==typeof a?function(b,c,e){let f,g,h=!1,i=new Promise(a=>{f=function(b){h=!0,a(b)}});try{g=a(b,c,f)}catch(a){g=Promise.reject(a)}const j=!0!==g&&d(g);if(!0!==g&&!j&&!h)return!1;const k=a=>{a.then(a=>{e(a)},a=>{let b;b=a&&(a instanceof Error||"string"==typeof a.message)?a.message:"An unexpected error occurred",e({__mozWebExtensionPolyfillReject__:!0,message:b})}).catch(a=>{console.error("Failed to send onMessage rejected reply",a)})};return j?k(g):k(i),!0}:a),n=({reject:b,resolve:c},d)=>{a.runtime.lastError?a.runtime.lastError.message==="The message port closed before a response was received."?c():b(new Error(a.runtime.lastError.message)):d&&d.__mozWebExtensionPolyfillReject__?b(new Error(d.message)):c(d)},o=(a,b,c,...d)=>{if(d.length<b.minArgs)throw new Error(`Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`);if(d.length>b.maxArgs)throw new Error(`Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`);return new Promise((a,b)=>{const e=n.bind(null,{resolve:a,reject:b});d.push(e),c.sendMessage(...d)})},p={devtools:{network:{onRequestFinished:k(l)}},runtime:{onMessage:k(m),onMessageExternal:k(m),sendMessage:o.bind(null,"sendMessage",{minArgs:1,maxArgs:3})},tabs:{sendMessage:o.bind(null,"sendMessage",{minArgs:2,maxArgs:3})}},q={clear:{minArgs:1,maxArgs:1},get:{minArgs:1,maxArgs:1},set:{minArgs:1,maxArgs:1}};return b.privacy={network:{"*":q},services:{"*":q},websites:{"*":q}},j(a,p,b)})(chrome)}else a.exports=globalThis.browser});
+Object.assign(globalThis, {
+  browser: globalThis._browser_userscript_polyfill,
+  chrome: globalThis._browser_userscript_polyfill,
+});
+(function (a, b) {
+  if ('function' == typeof define && define.amd)
+    define('webextension-polyfill', ['module'], b);
+  else if ('undefined' != typeof exports) b(module);
+  else {
+    var c = { exports: {} };
+    b(c), (a.browser = c.exports);
+  }
+})(
+  'undefined' == typeof globalThis
+    ? 'undefined' == typeof self
+      ? this
+      : self
+    : globalThis,
+  function (a) {
+    'use strict';
+    if (
+      !(
+        globalThis.chrome &&
+        globalThis.chrome.runtime &&
+        globalThis.chrome.runtime.id
+      )
+    )
+      throw new Error(
+        'This script should only be loaded in a browser extension.',
+      );
+    if (
+      !(
+        globalThis.browser &&
+        globalThis.browser.runtime &&
+        globalThis.browser.runtime.id
+      )
+    ) {
+      a.exports = ((a) => {
+        const b = {
+          alarms: {
+            clear: { minArgs: 0, maxArgs: 1 },
+            clearAll: { minArgs: 0, maxArgs: 0 },
+            get: { minArgs: 0, maxArgs: 1 },
+            getAll: { minArgs: 0, maxArgs: 0 },
+          },
+          bookmarks: {
+            create: { minArgs: 1, maxArgs: 1 },
+            get: { minArgs: 1, maxArgs: 1 },
+            getChildren: { minArgs: 1, maxArgs: 1 },
+            getRecent: { minArgs: 1, maxArgs: 1 },
+            getSubTree: { minArgs: 1, maxArgs: 1 },
+            getTree: { minArgs: 0, maxArgs: 0 },
+            move: { minArgs: 2, maxArgs: 2 },
+            remove: { minArgs: 1, maxArgs: 1 },
+            removeTree: { minArgs: 1, maxArgs: 1 },
+            search: { minArgs: 1, maxArgs: 1 },
+            update: { minArgs: 2, maxArgs: 2 },
+          },
+          browserAction: {
+            disable: { minArgs: 0, maxArgs: 1, fallbackToNoCallback: !0 },
+            enable: { minArgs: 0, maxArgs: 1, fallbackToNoCallback: !0 },
+            getBadgeBackgroundColor: { minArgs: 1, maxArgs: 1 },
+            getBadgeText: { minArgs: 1, maxArgs: 1 },
+            getPopup: { minArgs: 1, maxArgs: 1 },
+            getTitle: { minArgs: 1, maxArgs: 1 },
+            openPopup: { minArgs: 0, maxArgs: 0 },
+            setBadgeBackgroundColor: {
+              minArgs: 1,
+              maxArgs: 1,
+              fallbackToNoCallback: !0,
+            },
+            setBadgeText: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+            setIcon: { minArgs: 1, maxArgs: 1 },
+            setPopup: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+            setTitle: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+          },
+          browsingData: {
+            remove: { minArgs: 2, maxArgs: 2 },
+            removeCache: { minArgs: 1, maxArgs: 1 },
+            removeCookies: { minArgs: 1, maxArgs: 1 },
+            removeDownloads: { minArgs: 1, maxArgs: 1 },
+            removeFormData: { minArgs: 1, maxArgs: 1 },
+            removeHistory: { minArgs: 1, maxArgs: 1 },
+            removeLocalStorage: { minArgs: 1, maxArgs: 1 },
+            removePasswords: { minArgs: 1, maxArgs: 1 },
+            removePluginData: { minArgs: 1, maxArgs: 1 },
+            settings: { minArgs: 0, maxArgs: 0 },
+          },
+          commands: { getAll: { minArgs: 0, maxArgs: 0 } },
+          contextMenus: {
+            remove: { minArgs: 1, maxArgs: 1 },
+            removeAll: { minArgs: 0, maxArgs: 0 },
+            update: { minArgs: 2, maxArgs: 2 },
+          },
+          cookies: {
+            get: { minArgs: 1, maxArgs: 1 },
+            getAll: { minArgs: 1, maxArgs: 1 },
+            getAllCookieStores: { minArgs: 0, maxArgs: 0 },
+            remove: { minArgs: 1, maxArgs: 1 },
+            set: { minArgs: 1, maxArgs: 1 },
+          },
+          devtools: {
+            inspectedWindow: {
+              eval: { minArgs: 1, maxArgs: 2, singleCallbackArg: !1 },
+            },
+            panels: {
+              create: { minArgs: 3, maxArgs: 3, singleCallbackArg: !0 },
+              elements: { createSidebarPane: { minArgs: 1, maxArgs: 1 } },
+            },
+          },
+          downloads: {
+            cancel: { minArgs: 1, maxArgs: 1 },
+            download: { minArgs: 1, maxArgs: 1 },
+            erase: { minArgs: 1, maxArgs: 1 },
+            getFileIcon: { minArgs: 1, maxArgs: 2 },
+            open: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+            pause: { minArgs: 1, maxArgs: 1 },
+            removeFile: { minArgs: 1, maxArgs: 1 },
+            resume: { minArgs: 1, maxArgs: 1 },
+            search: { minArgs: 1, maxArgs: 1 },
+            show: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+          },
+          extension: {
+            isAllowedFileSchemeAccess: { minArgs: 0, maxArgs: 0 },
+            isAllowedIncognitoAccess: { minArgs: 0, maxArgs: 0 },
+          },
+          history: {
+            addUrl: { minArgs: 1, maxArgs: 1 },
+            deleteAll: { minArgs: 0, maxArgs: 0 },
+            deleteRange: { minArgs: 1, maxArgs: 1 },
+            deleteUrl: { minArgs: 1, maxArgs: 1 },
+            getVisits: { minArgs: 1, maxArgs: 1 },
+            search: { minArgs: 1, maxArgs: 1 },
+          },
+          i18n: {
+            detectLanguage: { minArgs: 1, maxArgs: 1 },
+            getAcceptLanguages: { minArgs: 0, maxArgs: 0 },
+          },
+          identity: { launchWebAuthFlow: { minArgs: 1, maxArgs: 1 } },
+          idle: { queryState: { minArgs: 1, maxArgs: 1 } },
+          management: {
+            get: { minArgs: 1, maxArgs: 1 },
+            getAll: { minArgs: 0, maxArgs: 0 },
+            getSelf: { minArgs: 0, maxArgs: 0 },
+            setEnabled: { minArgs: 2, maxArgs: 2 },
+            uninstallSelf: { minArgs: 0, maxArgs: 1 },
+          },
+          notifications: {
+            clear: { minArgs: 1, maxArgs: 1 },
+            create: { minArgs: 1, maxArgs: 2 },
+            getAll: { minArgs: 0, maxArgs: 0 },
+            getPermissionLevel: { minArgs: 0, maxArgs: 0 },
+            update: { minArgs: 2, maxArgs: 2 },
+          },
+          pageAction: {
+            getPopup: { minArgs: 1, maxArgs: 1 },
+            getTitle: { minArgs: 1, maxArgs: 1 },
+            hide: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+            setIcon: { minArgs: 1, maxArgs: 1 },
+            setPopup: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+            setTitle: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+            show: { minArgs: 1, maxArgs: 1, fallbackToNoCallback: !0 },
+          },
+          permissions: {
+            contains: { minArgs: 1, maxArgs: 1 },
+            getAll: { minArgs: 0, maxArgs: 0 },
+            remove: { minArgs: 1, maxArgs: 1 },
+            request: { minArgs: 1, maxArgs: 1 },
+          },
+          runtime: {
+            getBackgroundPage: { minArgs: 0, maxArgs: 0 },
+            getPlatformInfo: { minArgs: 0, maxArgs: 0 },
+            openOptionsPage: { minArgs: 0, maxArgs: 0 },
+            requestUpdateCheck: { minArgs: 0, maxArgs: 0 },
+            sendMessage: { minArgs: 1, maxArgs: 3 },
+            sendNativeMessage: { minArgs: 2, maxArgs: 2 },
+            setUninstallURL: { minArgs: 1, maxArgs: 1 },
+          },
+          sessions: {
+            getDevices: { minArgs: 0, maxArgs: 1 },
+            getRecentlyClosed: { minArgs: 0, maxArgs: 1 },
+            restore: { minArgs: 0, maxArgs: 1 },
+          },
+          storage: {
+            local: {
+              clear: { minArgs: 0, maxArgs: 0 },
+              get: { minArgs: 0, maxArgs: 1 },
+              getBytesInUse: { minArgs: 0, maxArgs: 1 },
+              remove: { minArgs: 1, maxArgs: 1 },
+              set: { minArgs: 1, maxArgs: 1 },
+            },
+            managed: {
+              get: { minArgs: 0, maxArgs: 1 },
+              getBytesInUse: { minArgs: 0, maxArgs: 1 },
+            },
+            sync: {
+              clear: { minArgs: 0, maxArgs: 0 },
+              get: { minArgs: 0, maxArgs: 1 },
+              getBytesInUse: { minArgs: 0, maxArgs: 1 },
+              remove: { minArgs: 1, maxArgs: 1 },
+              set: { minArgs: 1, maxArgs: 1 },
+            },
+          },
+          tabs: {
+            captureVisibleTab: { minArgs: 0, maxArgs: 2 },
+            create: { minArgs: 1, maxArgs: 1 },
+            detectLanguage: { minArgs: 0, maxArgs: 1 },
+            discard: { minArgs: 0, maxArgs: 1 },
+            duplicate: { minArgs: 1, maxArgs: 1 },
+            executeScript: { minArgs: 1, maxArgs: 2 },
+            get: { minArgs: 1, maxArgs: 1 },
+            getCurrent: { minArgs: 0, maxArgs: 0 },
+            getZoom: { minArgs: 0, maxArgs: 1 },
+            getZoomSettings: { minArgs: 0, maxArgs: 1 },
+            goBack: { minArgs: 0, maxArgs: 1 },
+            goForward: { minArgs: 0, maxArgs: 1 },
+            highlight: { minArgs: 1, maxArgs: 1 },
+            insertCSS: { minArgs: 1, maxArgs: 2 },
+            move: { minArgs: 2, maxArgs: 2 },
+            query: { minArgs: 1, maxArgs: 1 },
+            reload: { minArgs: 0, maxArgs: 2 },
+            remove: { minArgs: 1, maxArgs: 1 },
+            removeCSS: { minArgs: 1, maxArgs: 2 },
+            sendMessage: { minArgs: 2, maxArgs: 3 },
+            setZoom: { minArgs: 1, maxArgs: 2 },
+            setZoomSettings: { minArgs: 1, maxArgs: 2 },
+            update: { minArgs: 1, maxArgs: 2 },
+          },
+          topSites: { get: { minArgs: 0, maxArgs: 0 } },
+          webNavigation: {
+            getAllFrames: { minArgs: 1, maxArgs: 1 },
+            getFrame: { minArgs: 1, maxArgs: 1 },
+          },
+          webRequest: { handlerBehaviorChanged: { minArgs: 0, maxArgs: 0 } },
+          windows: {
+            create: { minArgs: 0, maxArgs: 1 },
+            get: { minArgs: 1, maxArgs: 2 },
+            getAll: { minArgs: 0, maxArgs: 1 },
+            getCurrent: { minArgs: 0, maxArgs: 1 },
+            getLastFocused: { minArgs: 0, maxArgs: 1 },
+            remove: { minArgs: 1, maxArgs: 1 },
+            update: { minArgs: 2, maxArgs: 2 },
+          },
+        };
+        if (0 === Object.keys(b).length)
+          throw new Error(
+            'api-metadata.json has not been included in browser-polyfill',
+          );
+        class c extends WeakMap {
+          constructor(a, b = void 0) {
+            super(b), (this.createItem = a);
+          }
+          get(a) {
+            return this.has(a) || this.set(a, this.createItem(a)), super.get(a);
+          }
+        }
+        const d = (a) =>
+            a && 'object' == typeof a && 'function' == typeof a.then,
+          e =
+            (b, c) =>
+            (...d) => {
+              a.runtime.lastError
+                ? b.reject(new Error(a.runtime.lastError.message))
+                : c.singleCallbackArg ||
+                    (1 >= d.length && !1 !== c.singleCallbackArg)
+                  ? b.resolve(d[0])
+                  : b.resolve(d);
+            },
+          f = (a) => (1 == a ? 'argument' : 'arguments'),
+          g = (a, b) =>
+            function (c, ...d) {
+              if (d.length < b.minArgs)
+                throw new Error(
+                  `Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`,
+                );
+              if (d.length > b.maxArgs)
+                throw new Error(
+                  `Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`,
+                );
+              return new Promise((f, g) => {
+                if (b.fallbackToNoCallback)
+                  try {
+                    c[a](...d, e({ resolve: f, reject: g }, b));
+                  } catch (e) {
+                    console.warn(
+                      `${a} API method doesn't seem to support the callback parameter, ` +
+                        'falling back to call it without a callback: ',
+                      e,
+                    ),
+                      c[a](...d),
+                      (b.fallbackToNoCallback = !1),
+                      (b.noCallback = !0),
+                      f();
+                  }
+                else
+                  b.noCallback
+                    ? (c[a](...d), f())
+                    : c[a](...d, e({ resolve: f, reject: g }, b));
+              });
+            },
+          h = (a, b, c) =>
+            new Proxy(b, {
+              apply(b, d, e) {
+                return c.call(d, a, ...e);
+              },
+            });
+        let i = Function.call.bind(Object.prototype.hasOwnProperty);
+        const j = (a, b = {}, c = {}) => {
+            let d = Object.create(null),
+              e = Object.create(a);
+            return new Proxy(e, {
+              has(b, c) {
+                return c in a || c in d;
+              },
+              get(e, f) {
+                if (f in d) return d[f];
+                if (!(f in a)) return;
+                let k = a[f];
+                if ('function' == typeof k) {
+                  if ('function' == typeof b[f]) k = h(a, a[f], b[f]);
+                  else if (i(c, f)) {
+                    let b = g(f, c[f]);
+                    k = h(a, a[f], b);
+                  } else k = k.bind(a);
+                } else if (
+                  'object' == typeof k &&
+                  null !== k &&
+                  (i(b, f) || i(c, f))
+                )
+                  k = j(k, b[f], c[f]);
+                else if (i(c, '*')) k = j(k, b[f], c['*']);
+                else
+                  return (
+                    Object.defineProperty(d, f, {
+                      configurable: !0,
+                      enumerable: !0,
+                      get() {
+                        return a[f];
+                      },
+                      set(b) {
+                        a[f] = b;
+                      },
+                    }),
+                    k
+                  );
+                return (d[f] = k), k;
+              },
+              set(b, c, e) {
+                return c in d ? (d[c] = e) : (a[c] = e), !0;
+              },
+              defineProperty(a, b, c) {
+                return Reflect.defineProperty(d, b, c);
+              },
+              deleteProperty(a, b) {
+                return Reflect.deleteProperty(d, b);
+              },
+            });
+          },
+          k = (a) => ({
+            addListener(b, c, ...d) {
+              b.addListener(a.get(c), ...d);
+            },
+            hasListener(b, c) {
+              return b.hasListener(a.get(c));
+            },
+            removeListener(b, c) {
+              b.removeListener(a.get(c));
+            },
+          }),
+          l = new c((a) =>
+            'function' == typeof a
+              ? function (b) {
+                  const c = j(
+                    b,
+                    {},
+                    { getContent: { minArgs: 0, maxArgs: 0 } },
+                  );
+                  a(c);
+                }
+              : a,
+          ),
+          m = new c((a) =>
+            'function' == typeof a
+              ? function (b, c, e) {
+                  let f,
+                    g,
+                    h = !1,
+                    i = new Promise((a) => {
+                      f = function (b) {
+                        (h = !0), a(b);
+                      };
+                    });
+                  try {
+                    g = a(b, c, f);
+                  } catch (a) {
+                    g = Promise.reject(a);
+                  }
+                  const j = !0 !== g && d(g);
+                  if (!0 !== g && !j && !h) return !1;
+                  const k = (a) => {
+                    a.then(
+                      (a) => {
+                        e(a);
+                      },
+                      (a) => {
+                        let b;
+                        (b =
+                          a &&
+                          (a instanceof Error || 'string' == typeof a.message)
+                            ? a.message
+                            : 'An unexpected error occurred'),
+                          e({
+                            __mozWebExtensionPolyfillReject__: !0,
+                            message: b,
+                          });
+                      },
+                    ).catch((a) => {
+                      console.error(
+                        'Failed to send onMessage rejected reply',
+                        a,
+                      );
+                    });
+                  };
+                  return j ? k(g) : k(i), !0;
+                }
+              : a,
+          ),
+          n = ({ reject: b, resolve: c }, d) => {
+            a.runtime.lastError
+              ? a.runtime.lastError.message ===
+                'The message port closed before a response was received.'
+                ? c()
+                : b(new Error(a.runtime.lastError.message))
+              : d && d.__mozWebExtensionPolyfillReject__
+                ? b(new Error(d.message))
+                : c(d);
+          },
+          o = (a, b, c, ...d) => {
+            if (d.length < b.minArgs)
+              throw new Error(
+                `Expected at least ${b.minArgs} ${f(b.minArgs)} for ${a}(), got ${d.length}`,
+              );
+            if (d.length > b.maxArgs)
+              throw new Error(
+                `Expected at most ${b.maxArgs} ${f(b.maxArgs)} for ${a}(), got ${d.length}`,
+              );
+            return new Promise((a, b) => {
+              const e = n.bind(null, { resolve: a, reject: b });
+              d.push(e), c.sendMessage(...d);
+            });
+          },
+          p = {
+            devtools: { network: { onRequestFinished: k(l) } },
+            runtime: {
+              onMessage: k(m),
+              onMessageExternal: k(m),
+              sendMessage: o.bind(null, 'sendMessage', {
+                minArgs: 1,
+                maxArgs: 3,
+              }),
+            },
+            tabs: {
+              sendMessage: o.bind(null, 'sendMessage', {
+                minArgs: 2,
+                maxArgs: 3,
+              }),
+            },
+          },
+          q = {
+            clear: { minArgs: 1, maxArgs: 1 },
+            get: { minArgs: 1, maxArgs: 1 },
+            set: { minArgs: 1, maxArgs: 1 },
+          };
+        return (
+          (b.privacy = {
+            network: { '*': q },
+            services: { '*': q },
+            websites: { '*': q },
+          }),
+          j(a, p, b)
+        );
+      })(chrome);
+    } else a.exports = globalThis.browser;
+  },
+);
 //# sourceMappingURL=browser-polyfill.min.js.map
 
 // webextension-polyfill v.0.12.0 (https://github.com/mozilla/webextension-polyfill)
@@ -467,17 +953,330 @@ Object.assign(globalThis, {browser: globalThis._browser_userscript_polyfill, chr
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 /* mousetrap v1.6.5 craig.is/killing/mice */
-(function(q,u,c){function v(a,b,g){a.addEventListener?a.addEventListener(b,g,!1):a.attachEvent("on"+b,g)}function z(a){if("keypress"==a.type){var b=String.fromCharCode(a.which);a.shiftKey||(b=b.toLowerCase());return b}return n[a.which]?n[a.which]:r[a.which]?r[a.which]:String.fromCharCode(a.which).toLowerCase()}function F(a){var b=[];a.shiftKey&&b.push("shift");a.altKey&&b.push("alt");a.ctrlKey&&b.push("ctrl");a.metaKey&&b.push("meta");return b}function w(a){return"shift"==a||"ctrl"==a||"alt"==a||
-"meta"==a}function A(a,b){var g,d=[];var e=a;"+"===e?e=["+"]:(e=e.replace(/\+{2}/g,"+plus"),e=e.split("+"));for(g=0;g<e.length;++g){var m=e[g];B[m]&&(m=B[m]);b&&"keypress"!=b&&C[m]&&(m=C[m],d.push("shift"));w(m)&&d.push(m)}e=m;g=b;if(!g){if(!p){p={};for(var c in n)95<c&&112>c||n.hasOwnProperty(c)&&(p[n[c]]=c)}g=p[e]?"keydown":"keypress"}"keypress"==g&&d.length&&(g="keydown");return{key:m,modifiers:d,action:g}}function D(a,b){return null===a||a===u?!1:a===b?!0:D(a.parentNode,b)}function d(a){function b(a){a=
-a||{};var b=!1,l;for(l in p)a[l]?b=!0:p[l]=0;b||(x=!1)}function g(a,b,t,f,g,d){var l,E=[],h=t.type;if(!k._callbacks[a])return[];"keyup"==h&&w(a)&&(b=[a]);for(l=0;l<k._callbacks[a].length;++l){var c=k._callbacks[a][l];if((f||!c.seq||p[c.seq]==c.level)&&h==c.action){var e;(e="keypress"==h&&!t.metaKey&&!t.ctrlKey)||(e=c.modifiers,e=b.sort().join(",")===e.sort().join(","));e&&(e=f&&c.seq==f&&c.level==d,(!f&&c.combo==g||e)&&k._callbacks[a].splice(l,1),E.push(c))}}return E}function c(a,b,c,f){k.stopCallback(b,
-b.target||b.srcElement,c,f)||!1!==a(b,c)||(b.preventDefault?b.preventDefault():b.returnValue=!1,b.stopPropagation?b.stopPropagation():b.cancelBubble=!0)}function e(a){"number"!==typeof a.which&&(a.which=a.keyCode);var b=z(a);b&&("keyup"==a.type&&y===b?y=!1:k.handleKey(b,F(a),a))}function m(a,g,t,f){function h(c){return function(){x=c;++p[a];clearTimeout(q);q=setTimeout(b,1E3)}}function l(g){c(t,g,a);"keyup"!==f&&(y=z(g));setTimeout(b,10)}for(var d=p[a]=0;d<g.length;++d){var e=d+1===g.length?l:h(f||
-A(g[d+1]).action);n(g[d],e,f,a,d)}}function n(a,b,c,f,d){k._directMap[a+":"+c]=b;a=a.replace(/\s+/g," ");var e=a.split(" ");1<e.length?m(a,e,b,c):(c=A(a,c),k._callbacks[c.key]=k._callbacks[c.key]||[],g(c.key,c.modifiers,{type:c.action},f,a,d),k._callbacks[c.key][f?"unshift":"push"]({callback:b,modifiers:c.modifiers,action:c.action,seq:f,level:d,combo:a}))}var k=this;a=a||u;if(!(k instanceof d))return new d(a);k.target=a;k._callbacks={};k._directMap={};var p={},q,y=!1,r=!1,x=!1;k._handleKey=function(a,
-d,e){var f=g(a,d,e),h;d={};var k=0,l=!1;for(h=0;h<f.length;++h)f[h].seq&&(k=Math.max(k,f[h].level));for(h=0;h<f.length;++h)f[h].seq?f[h].level==k&&(l=!0,d[f[h].seq]=1,c(f[h].callback,e,f[h].combo,f[h].seq)):l||c(f[h].callback,e,f[h].combo);f="keypress"==e.type&&r;e.type!=x||w(a)||f||b(d);r=l&&"keydown"==e.type};k._bindMultiple=function(a,b,c){for(var d=0;d<a.length;++d)n(a[d],b,c)};v(a,"keypress",e);v(a,"keydown",e);v(a,"keyup",e)}if(q){var n={8:"backspace",9:"tab",13:"enter",16:"shift",17:"ctrl",
-18:"alt",20:"capslock",27:"esc",32:"space",33:"pageup",34:"pagedown",35:"end",36:"home",37:"left",38:"up",39:"right",40:"down",45:"ins",46:"del",91:"meta",93:"meta",224:"meta"},r={106:"*",107:"+",109:"-",110:".",111:"/",186:";",187:"=",188:",",189:"-",190:".",191:"/",192:"`",219:"[",220:"\\",221:"]",222:"'"},C={"~":"`","!":"1","@":"2","#":"3",$:"4","%":"5","^":"6","&":"7","*":"8","(":"9",")":"0",_:"-","+":"=",":":";",'"':"'","<":",",">":".","?":"/","|":"\\"},B={option:"alt",command:"meta","return":"enter",
-escape:"esc",plus:"+",mod:/Mac|iPod|iPhone|iPad/.test(navigator.platform)?"meta":"ctrl"},p;for(c=1;20>c;++c)n[111+c]="f"+c;for(c=0;9>=c;++c)n[c+96]=c.toString();d.prototype.bind=function(a,b,c){a=a instanceof Array?a:[a];this._bindMultiple.call(this,a,b,c);return this};d.prototype.unbind=function(a,b){return this.bind.call(this,a,function(){},b)};d.prototype.trigger=function(a,b){if(this._directMap[a+":"+b])this._directMap[a+":"+b]({},a);return this};d.prototype.reset=function(){this._callbacks={};
-this._directMap={};return this};d.prototype.stopCallback=function(a,b){if(-1<(" "+b.className+" ").indexOf(" mousetrap ")||D(b,this.target))return!1;if("composedPath"in a&&"function"===typeof a.composedPath){var c=a.composedPath()[0];c!==a.target&&(b=c)}return"INPUT"==b.tagName||"SELECT"==b.tagName||"TEXTAREA"==b.tagName||b.isContentEditable};d.prototype.handleKey=function(){return this._handleKey.apply(this,arguments)};d.addKeycodes=function(a){for(var b in a)a.hasOwnProperty(b)&&(n[b]=a[b]);p=null};
-d.init=function(){var a=d(u),b;for(b in a)"_"!==b.charAt(0)&&(d[b]=function(b){return function(){return a[b].apply(a,arguments)}}(b))};d.init();q.Mousetrap=d;"undefined"!==typeof module&&module.exports&&(module.exports=d);"function"===typeof define&&define.amd&&define(function(){return d})}})("undefined"!==typeof window?window:null,"undefined"!==typeof window?document:null);
-(function(a){var c={},d=a.prototype.stopCallback;a.prototype.stopCallback=function(e,b,a,f){return this.paused?!0:c[a]||c[f]?!1:d.call(this,e,b,a)};a.prototype.bindGlobal=function(a,b,d){this.bind(a,b,d);if(a instanceof Array)for(b=0;b<a.length;b++)c[a[b]]=!0;else c[a]=!0};a.init()})(Mousetrap);
+(function (q, u, c) {
+  function v(a, b, g) {
+    a.addEventListener
+      ? a.addEventListener(b, g, !1)
+      : a.attachEvent('on' + b, g);
+  }
+  function z(a) {
+    if ('keypress' == a.type) {
+      var b = String.fromCharCode(a.which);
+      a.shiftKey || (b = b.toLowerCase());
+      return b;
+    }
+    return n[a.which]
+      ? n[a.which]
+      : r[a.which]
+        ? r[a.which]
+        : String.fromCharCode(a.which).toLowerCase();
+  }
+  function F(a) {
+    var b = [];
+    a.shiftKey && b.push('shift');
+    a.altKey && b.push('alt');
+    a.ctrlKey && b.push('ctrl');
+    a.metaKey && b.push('meta');
+    return b;
+  }
+  function w(a) {
+    return 'shift' == a || 'ctrl' == a || 'alt' == a || 'meta' == a;
+  }
+  function A(a, b) {
+    var g,
+      d = [];
+    var e = a;
+    '+' === e
+      ? (e = ['+'])
+      : ((e = e.replace(/\+{2}/g, '+plus')), (e = e.split('+')));
+    for (g = 0; g < e.length; ++g) {
+      var m = e[g];
+      B[m] && (m = B[m]);
+      b && 'keypress' != b && C[m] && ((m = C[m]), d.push('shift'));
+      w(m) && d.push(m);
+    }
+    e = m;
+    g = b;
+    if (!g) {
+      if (!p) {
+        p = {};
+        for (var c in n)
+          (95 < c && 112 > c) || (n.hasOwnProperty(c) && (p[n[c]] = c));
+      }
+      g = p[e] ? 'keydown' : 'keypress';
+    }
+    'keypress' == g && d.length && (g = 'keydown');
+    return { key: m, modifiers: d, action: g };
+  }
+  function D(a, b) {
+    return null === a || a === u ? !1 : a === b ? !0 : D(a.parentNode, b);
+  }
+  function d(a) {
+    function b(a) {
+      a = a || {};
+      var b = !1,
+        l;
+      for (l in p) a[l] ? (b = !0) : (p[l] = 0);
+      b || (x = !1);
+    }
+    function g(a, b, t, f, g, d) {
+      var l,
+        E = [],
+        h = t.type;
+      if (!k._callbacks[a]) return [];
+      'keyup' == h && w(a) && (b = [a]);
+      for (l = 0; l < k._callbacks[a].length; ++l) {
+        var c = k._callbacks[a][l];
+        if ((f || !c.seq || p[c.seq] == c.level) && h == c.action) {
+          var e;
+          (e = 'keypress' == h && !t.metaKey && !t.ctrlKey) ||
+            ((e = c.modifiers),
+            (e = b.sort().join(',') === e.sort().join(',')));
+          e &&
+            ((e = f && c.seq == f && c.level == d),
+            ((!f && c.combo == g) || e) && k._callbacks[a].splice(l, 1),
+            E.push(c));
+        }
+      }
+      return E;
+    }
+    function c(a, b, c, f) {
+      k.stopCallback(b, b.target || b.srcElement, c, f) ||
+        !1 !== a(b, c) ||
+        (b.preventDefault ? b.preventDefault() : (b.returnValue = !1),
+        b.stopPropagation ? b.stopPropagation() : (b.cancelBubble = !0));
+    }
+    function e(a) {
+      'number' !== typeof a.which && (a.which = a.keyCode);
+      var b = z(a);
+      b && ('keyup' == a.type && y === b ? (y = !1) : k.handleKey(b, F(a), a));
+    }
+    function m(a, g, t, f) {
+      function h(c) {
+        return function () {
+          x = c;
+          ++p[a];
+          clearTimeout(q);
+          q = setTimeout(b, 1e3);
+        };
+      }
+      function l(g) {
+        c(t, g, a);
+        'keyup' !== f && (y = z(g));
+        setTimeout(b, 10);
+      }
+      for (var d = (p[a] = 0); d < g.length; ++d) {
+        var e = d + 1 === g.length ? l : h(f || A(g[d + 1]).action);
+        n(g[d], e, f, a, d);
+      }
+    }
+    function n(a, b, c, f, d) {
+      k._directMap[a + ':' + c] = b;
+      a = a.replace(/\s+/g, ' ');
+      var e = a.split(' ');
+      1 < e.length
+        ? m(a, e, b, c)
+        : ((c = A(a, c)),
+          (k._callbacks[c.key] = k._callbacks[c.key] || []),
+          g(c.key, c.modifiers, { type: c.action }, f, a, d),
+          k._callbacks[c.key][f ? 'unshift' : 'push']({
+            callback: b,
+            modifiers: c.modifiers,
+            action: c.action,
+            seq: f,
+            level: d,
+            combo: a,
+          }));
+    }
+    var k = this;
+    a = a || u;
+    if (!(k instanceof d)) return new d(a);
+    k.target = a;
+    k._callbacks = {};
+    k._directMap = {};
+    var p = {},
+      q,
+      y = !1,
+      r = !1,
+      x = !1;
+    k._handleKey = function (a, d, e) {
+      var f = g(a, d, e),
+        h;
+      d = {};
+      var k = 0,
+        l = !1;
+      for (h = 0; h < f.length; ++h) f[h].seq && (k = Math.max(k, f[h].level));
+      for (h = 0; h < f.length; ++h)
+        f[h].seq
+          ? f[h].level == k &&
+            ((l = !0),
+            (d[f[h].seq] = 1),
+            c(f[h].callback, e, f[h].combo, f[h].seq))
+          : l || c(f[h].callback, e, f[h].combo);
+      f = 'keypress' == e.type && r;
+      e.type != x || w(a) || f || b(d);
+      r = l && 'keydown' == e.type;
+    };
+    k._bindMultiple = function (a, b, c) {
+      for (var d = 0; d < a.length; ++d) n(a[d], b, c);
+    };
+    v(a, 'keypress', e);
+    v(a, 'keydown', e);
+    v(a, 'keyup', e);
+  }
+  if (q) {
+    var n = {
+        8: 'backspace',
+        9: 'tab',
+        13: 'enter',
+        16: 'shift',
+        17: 'ctrl',
+        18: 'alt',
+        20: 'capslock',
+        27: 'esc',
+        32: 'space',
+        33: 'pageup',
+        34: 'pagedown',
+        35: 'end',
+        36: 'home',
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down',
+        45: 'ins',
+        46: 'del',
+        91: 'meta',
+        93: 'meta',
+        224: 'meta',
+      },
+      r = {
+        106: '*',
+        107: '+',
+        109: '-',
+        110: '.',
+        111: '/',
+        186: ';',
+        187: '=',
+        188: ',',
+        189: '-',
+        190: '.',
+        191: '/',
+        192: '`',
+        219: '[',
+        220: '\\',
+        221: ']',
+        222: "'",
+      },
+      C = {
+        '~': '`',
+        '!': '1',
+        '@': '2',
+        '#': '3',
+        $: '4',
+        '%': '5',
+        '^': '6',
+        '&': '7',
+        '*': '8',
+        '(': '9',
+        ')': '0',
+        _: '-',
+        '+': '=',
+        ':': ';',
+        '"': "'",
+        '<': ',',
+        '>': '.',
+        '?': '/',
+        '|': '\\',
+      },
+      B = {
+        option: 'alt',
+        command: 'meta',
+        return: 'enter',
+        escape: 'esc',
+        plus: '+',
+        mod: /Mac|iPod|iPhone|iPad/.test(navigator.platform) ? 'meta' : 'ctrl',
+      },
+      p;
+    for (c = 1; 20 > c; ++c) n[111 + c] = 'f' + c;
+    for (c = 0; 9 >= c; ++c) n[c + 96] = c.toString();
+    d.prototype.bind = function (a, b, c) {
+      a = a instanceof Array ? a : [a];
+      this._bindMultiple.call(this, a, b, c);
+      return this;
+    };
+    d.prototype.unbind = function (a, b) {
+      return this.bind.call(this, a, function () {}, b);
+    };
+    d.prototype.trigger = function (a, b) {
+      if (this._directMap[a + ':' + b]) this._directMap[a + ':' + b]({}, a);
+      return this;
+    };
+    d.prototype.reset = function () {
+      this._callbacks = {};
+      this._directMap = {};
+      return this;
+    };
+    d.prototype.stopCallback = function (a, b) {
+      if (
+        -1 < (' ' + b.className + ' ').indexOf(' mousetrap ') ||
+        D(b, this.target)
+      )
+        return !1;
+      if ('composedPath' in a && 'function' === typeof a.composedPath) {
+        var c = a.composedPath()[0];
+        c !== a.target && (b = c);
+      }
+      return (
+        'INPUT' == b.tagName ||
+        'SELECT' == b.tagName ||
+        'TEXTAREA' == b.tagName ||
+        b.isContentEditable
+      );
+    };
+    d.prototype.handleKey = function () {
+      return this._handleKey.apply(this, arguments);
+    };
+    d.addKeycodes = function (a) {
+      for (var b in a) a.hasOwnProperty(b) && (n[b] = a[b]);
+      p = null;
+    };
+    d.init = function () {
+      var a = d(u),
+        b;
+      for (b in a)
+        '_' !== b.charAt(0) &&
+          (d[b] = (function (b) {
+            return function () {
+              return a[b].apply(a, arguments);
+            };
+          })(b));
+    };
+    d.init();
+    q.Mousetrap = d;
+    'undefined' !== typeof module && module.exports && (module.exports = d);
+    'function' === typeof define &&
+      define.amd &&
+      define(function () {
+        return d;
+      });
+  }
+})(
+  'undefined' !== typeof window ? window : null,
+  'undefined' !== typeof window ? document : null,
+);
+(function (a) {
+  var c = {},
+    d = a.prototype.stopCallback;
+  a.prototype.stopCallback = function (e, b, a, f) {
+    return this.paused ? !0 : c[a] || c[f] ? !1 : d.call(this, e, b, a);
+  };
+  a.prototype.bindGlobal = function (a, b, d) {
+    this.bind(a, b, d);
+    if (a instanceof Array) for (b = 0; b < a.length; b++) c[a[b]] = !0;
+    else c[a] = !0;
+  };
+  a.init();
+})(Mousetrap);
 const DEFAULT_CSS = `/* NOTE:
  *
  * - Using !important is needed for some styles because otherwise they get
@@ -840,11 +1639,11 @@ class SearchResult {
    * @param {function|null} containerSelector
    */
   constructor(
-      element,
-      anchorSelector,
-      highlightClass,
-      highlightedElementSelector,
-      containerSelector,
+    element,
+    anchorSelector,
+    highlightClass,
+    highlightedElementSelector,
+    containerSelector,
   ) {
     this.#element = element;
     this.#anchorSelector = anchorSelector;
@@ -880,8 +1679,8 @@ class SearchResult {
  * @constructor
  */
 const getSortedSearchResults = (
-    includedSearchResults,
-    excludedNodeList = [],
+  includedSearchResults,
+  excludedNodeList = [],
 ) => {
   const excludedResultsSet = new Set();
   for (const node of excludedNodeList) {
@@ -891,11 +1690,11 @@ const getSortedSearchResults = (
   for (const results of includedSearchResults) {
     for (const node of results.nodes) {
       const searchResult = new SearchResult(
-          node,
-          results.anchorSelector,
-          results.highlightClass,
-          results.highlightedElementSelector,
-          results.containerSelector,
+        node,
+        results.anchorSelector,
+        results.highlightClass,
+        results.highlightedElementSelector,
+        results.containerSelector,
       );
       const anchor = searchResult.anchor;
       // Use offsetParent to exclude hidden elements, see:
@@ -987,8 +1786,8 @@ class GoogleSearch {
   }
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('#searchform.minidiv'),
-        element,
+      document.querySelector('#searchform.minidiv'),
+      element,
     );
   }
   getBottomMargin(element) {
@@ -1007,9 +1806,9 @@ class GoogleSearch {
       return;
     }
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(true);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(true);
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -1055,7 +1854,7 @@ class GoogleSearch {
       // https://imgur.com/a/X9zyJ24
       {
         nodes: document.querySelectorAll(
-            '#botstuff a[href^="/search"][href*="start="] h3',
+          '#botstuff a[href^="/search"][href*="start="] h3',
         ),
         highlightClass: 'wsn-google-focused-link',
         anchorSelector: (n) => n.closest('a'),
@@ -1120,8 +1919,8 @@ class GoogleSearch {
       // TODO: add screenshot
       {
         nodes: document.querySelectorAll(
-            // eslint-disable-next-line max-len
-            '#search a:is([href*="ibp=htl;jobs"],[href*="htivrt=jobs"]) [role=heading][aria-level="2"]',
+          // eslint-disable-next-line max-len
+          '#search a:is([href*="ibp=htl;jobs"],[href*="htivrt=jobs"]) [role=heading][aria-level="2"]',
         ),
         anchorSelector: (n) => n.closest('a'),
         // highlightedElementSelector: (n) => n.closest('li'),
@@ -1174,7 +1973,7 @@ class GoogleSearch {
       // Twitter: https://imgur.com/a/fdI75JG
       {
         nodes: document.querySelectorAll(
-            '#search [data-init-vis=true] [role=heading]',
+          '#search [data-init-vis=true] [role=heading]',
         ),
         anchorSelector: nearestChildOrSiblingOrParentAnchor,
         highlightedElementSelector: nearestCardContainer,
@@ -1190,7 +1989,7 @@ class GoogleSearch {
       // Vertical video results: https://imgur.com/a/8fbPnvT
       {
         nodes: document.querySelectorAll(
-            '#search video-voyager a [role=heading]',
+          '#search video-voyager a [role=heading]',
         ),
         anchorSelector: nearestChildOrSiblingOrParentAnchor,
         containerSelector: nearestChildOrSiblingOrParentAnchor,
@@ -1201,7 +2000,7 @@ class GoogleSearch {
       // People also search for: https://imgur.com/a/QpCHKt0
       {
         nodes: document.querySelectorAll(
-            '#search g-scrolling-carousel g-inner-card a [role=heading]',
+          '#search g-scrolling-carousel g-inner-card a [role=heading]',
         ),
         anchorSelector: nearestChildOrSiblingOrParentAnchor,
         containerSelector: nearestCardContainer,
@@ -1211,7 +2010,7 @@ class GoogleSearch {
       // Vaccines: https://imgur.com/a/325qJzE
       {
         nodes: document.querySelectorAll(
-            '#search a.a-no-hover-decoration [role=heading]',
+          '#search a.a-no-hover-decoration [role=heading]',
         ),
         anchorSelector: nearestChildOrSiblingOrParentAnchor,
         containerSelector: nearestChildOrSiblingOrParentAnchor,
@@ -1269,7 +2068,7 @@ class GoogleSearch {
     return [
       {
         nodes: document.querySelectorAll(
-            '#memexResults ._3d3zwUrsb4CVi1Li4H6CBw a',
+          '#memexResults ._3d3zwUrsb4CVi1Li4H6CBw a',
         ),
         highlightClass: 'wsn-google-focused-memex-result',
       },
@@ -1291,18 +2090,18 @@ class GoogleSearch {
       includedElements.push(...GoogleSearch.#memexResults());
     }
     const excludedElements = document.querySelectorAll(
-        [
-          // People also ask. Each one of the used selectors should be
-          // sufficient, but we use both to be more robust to upstream DOM
-          // changes.
-          '.related-question-pair a',
-          '#search .kp-blk:not(.c2xzTb) .r > a:first-of-type',
-          // Right hand sidebar. We exclude it because it is after all the
-          // results in the document order (as determined by
-          // Node.DOCUMENT_POSITION_FOLLOWING used in getSortedSearchResults),
-          // and it's confusing.
-          '#rhs a',
-        ].join(', '),
+      [
+        // People also ask. Each one of the used selectors should be
+        // sufficient, but we use both to be more robust to upstream DOM
+        // changes.
+        '.related-question-pair a',
+        '#search .kp-blk:not(.c2xzTb) .r > a:first-of-type',
+        // Right hand sidebar. We exclude it because it is after all the
+        // results in the document order (as determined by
+        // Node.DOCUMENT_POSITION_FOLLOWING used in getSortedSearchResults),
+        // and it's confusing.
+        '#rhs a',
+      ].join(', '),
     );
     return getSortedSearchResults(includedElements, excludedElements);
   }
@@ -1313,9 +2112,9 @@ class GoogleSearch {
       return;
     }
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(true);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(true);
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -1330,11 +2129,11 @@ class GoogleSearch {
       return;
     }
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          if (document.querySelector('#memexResults') != null) {
-            callback(true);
-          }
-        }, 50),
+      debounce((mutationsList, observer) => {
+        if (document.querySelector('#memexResults') != null) {
+          callback(true);
+        }
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -1353,21 +2152,21 @@ class GoogleSearch {
     return {
       navigateSearchTab: visibleTabs[0],
       navigateMapsTab: selectorElementGetter(
-          '.T47uwc > a[href*="maps.google."]',
+        '.T47uwc > a[href*="maps.google."]',
       ),
       navigateVideosTab: selectorElementGetter('.T47uwc > a[href*="&tbm=vid"]'),
       navigateNewsTab: selectorElementGetter('.T47uwc > a[href*="&tbm=nws"]'),
       navigateShoppingTab: selectorElementGetter(
-          'a[role="menuitem"][href*="&tbm=shop"]',
+        'a[role="menuitem"][href*="&tbm=shop"]',
       ),
       navigateBooksTab: selectorElementGetter(
-          'a[role="menuitem"][href*="&tbm=bks"]',
+        'a[role="menuitem"][href*="&tbm=bks"]',
       ),
       navigateFlightsTab: selectorElementGetter(
-          'a[role="menuitem"][href*="&tbm=flm"]',
+        'a[role="menuitem"][href*="&tbm=flm"]',
       ),
       navigateFinancialTab: selectorElementGetter(
-          'a[role="menuitem"][href*="/finance?"]',
+        'a[role="menuitem"][href*="/finance?"]',
       ),
       // TODO: Disable image search's default keybindings to avoid confusing the
       // user, because the default keybindings can cause an indenepdent
@@ -1406,8 +2205,8 @@ class GoogleSearch {
     }
     return {
       navigateSearchTab: selectorElementGetter(
-          // eslint-disable-next-line max-len
-          'a[href*="/search?q="]:not([href*="&tbm="]):not([href*="maps.google."])',
+        // eslint-disable-next-line max-len
+        'a[href*="/search?q="]:not([href*="&tbm="]):not([href*="maps.google."])',
       ),
       navigateImagesTab: selectorElementGetter('a[href*="&tbm=isch"]'),
       navigateVideosTab: selectorElementGetter('a[href*="&tbm=vid"]'),
@@ -1459,8 +2258,8 @@ class GoogleSearch {
       // Can't apply sort when not using period.
     } else if (currentPeriod) {
       searchParams.set(
-          'tbs',
-          `${currentPeriod}` + (currentSort ? '' : ',sbd:1'),
+        'tbs',
+        `${currentPeriod}` + (currentSort ? '' : ',sbd:1'),
       );
     }
     const newSearchString = '?' + searchParams.toString();
@@ -1472,12 +2271,12 @@ class GoogleSearch {
 
   changeImageSize(size) {
     const sizeOptions = {
-      LARGE: {value: 0, name: 'Large', code: 'l'},
-      MEDIUM: {value: 1, name: 'Medium', code: 'e'},
-      ICON: {value: 2, name: 'Icon', code: 'i'},
+      LARGE: { value: 0, name: 'Large', code: 'l' },
+      MEDIUM: { value: 1, name: 'Medium', code: 'e' },
+      ICON: { value: 2, name: 'Icon', code: 'i' },
     };
     const openTool = document.querySelector(
-        '[class="PNyWAd ZXJQ7c"][jsname="I4bIT"]',
+      '[class="PNyWAd ZXJQ7c"][jsname="I4bIT"]',
     );
     if (openTool != null) {
       openTool.click();
@@ -1487,7 +2286,7 @@ class GoogleSearch {
       openSizeDropDown.click();
     }
     const dropDownWithSize = document.querySelector(
-        '[class="xFo9P r9PaP Fmo8N"][jsname="wLFV5d"]',
+      '[class="xFo9P r9PaP Fmo8N"][jsname="wLFV5d"]',
     );
     const getButton = (selector) => {
       let button;
@@ -1517,8 +2316,8 @@ class GoogleSearch {
           dropDownWithSize.getAttribute('aria-label') != sizeOptions.LARGE.name
         ) {
           setImageSize(
-              dropDownWithSize,
-              '[class="MfLWbb"][aria-label="Large"]',
+            dropDownWithSize,
+            '[class="MfLWbb"][aria-label="Large"]',
           );
         }
         break;
@@ -1528,8 +2327,8 @@ class GoogleSearch {
           dropDownWithSize.getAttribute('aria-label') != sizeOptions.MEDIUM.name
         ) {
           setImageSize(
-              dropDownWithSize,
-              '[class="MfLWbb"][aria-label="Medium"]',
+            dropDownWithSize,
+            '[class="MfLWbb"][aria-label="Medium"]',
           );
         }
         break;
@@ -1562,17 +2361,17 @@ class BraveSearch {
 
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('header.navbar'),
-        element,
+      document.querySelector('header.navbar'),
+      element,
     );
   }
 
   onChangedResults(callback) {
     const containers = document.querySelectorAll('#results');
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(true);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(true);
+      }, 50),
     );
     for (const container of containers) {
       observer.observe(container, {
@@ -1622,14 +2421,14 @@ class BraveSearch {
       // News cards
       {
         nodes: document.querySelectorAll(
-            '.card[data-type="news"]:nth-child(-n+3)',
+          '.card[data-type="news"]:nth-child(-n+3)',
         ),
         highlightClass: 'wsn-brave-search-focused-card',
       },
       // Video cards
       {
         nodes: document.querySelectorAll(
-            '.card[data-type="videos"]:nth-child(-n+3)',
+          '.card[data-type="videos"]:nth-child(-n+3)',
         ),
         highlightClass: 'wsn-brave-search-focused-card',
       },
@@ -1646,11 +2445,11 @@ class BraveSearch {
     return {
       navigateSearchTab: document.querySelector('a[href*="/search?q="]'),
       navigateImagesTab: document.querySelector(
-          '#tab-images > a:first-of-type',
+        '#tab-images > a:first-of-type',
       ),
       navigateNewsTab: document.querySelector('a[href*="/news?q="]'),
       navigateVideosTab: document.querySelector(
-          '#tab-videos > a:first-of-type',
+        '#tab-videos > a:first-of-type',
       ),
     };
   }
@@ -1668,8 +2467,8 @@ class StartPage {
   }
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('div.layout-web__header'),
-        element,
+      document.querySelector('div.layout-web__header'),
+      element,
     );
   }
   getBottomMargin(element) {
@@ -1713,7 +2512,7 @@ class StartPage {
       // As of 2020-06-20, this doesn't seem to match anything.
       {
         nodes: document.querySelectorAll(
-            '.vo-sp.vo-sp--default > a.vo-sp__link',
+          '.vo-sp.vo-sp--default > a.vo-sp__link',
         ),
         highlightedElementSelector: containerSelector,
         highlightClass: 'wsn-startpage-focused-link',
@@ -1730,7 +2529,7 @@ class StartPage {
     }
 
     return document.querySelector(
-        'form.pagination__form.next-prev-form--desktop:first-of-type',
+      'form.pagination__form.next-prev-form--desktop:first-of-type',
     );
   }
 
@@ -1741,7 +2540,7 @@ class StartPage {
     }
 
     return document.querySelector(
-        'form.pagination__form.next-prev-form--desktop:last-of-type',
+      'form.pagination__form.next-prev-form--desktop:last-of-type',
     );
   }
 
@@ -1800,8 +2599,8 @@ class YouTube {
   }
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('#masthead-container'),
-        element,
+      document.querySelector('#masthead-container'),
+      element,
     );
   }
 
@@ -1816,9 +2615,9 @@ class YouTube {
       'ytd-shelf-renderer',
     ].join(',');
     const resultsObserver = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(true);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(true);
+      }, 50),
     );
     let lastLoadedURL = null;
     const pageObserverCallback = (mutationsList, observer) => {
@@ -1848,7 +2647,7 @@ class YouTube {
     // (which is what happened in issue #337 [1]).
     // [1] https://github.com/infokiller/web-search-navigator/issues/337
     const pageObserver = new MutationObserver(
-        debounce(pageObserverCallback, 50),
+      debounce(pageObserverCallback, 50),
     );
     pageObserver.observe(document.querySelector('#page-manager'), {
       attributes: false,
@@ -1869,7 +2668,7 @@ class YouTube {
       // Playlist results in vertical search results: https://imgur.com/a/nPjGd9H
       {
         nodes: document.querySelectorAll(
-            'ytd-playlist-renderer a[href*="/playlist"]',
+          'ytd-playlist-renderer a[href*="/playlist"]',
         ),
         highlightClass: 'wsn-youtube-focused-video',
         highlightedElementSelector: (n) => n.closest('ytd-playlist-renderer'),
@@ -1891,7 +2690,7 @@ class YouTube {
       // Channels
       {
         nodes: document.querySelectorAll(
-            'ytd-grid-video-renderer a#video-title:not([aria-hidden="true"])',
+          'ytd-grid-video-renderer a#video-title:not([aria-hidden="true"])',
         ),
         highlightClass: 'wsn-youtube-focused-grid-video',
         highlightedElementSelector: (n) => n.closest('ytd-grid-video-renderer'),
@@ -1901,26 +2700,26 @@ class YouTube {
     // checking if homepage results are present
     const homePageElements = {
       nodes: document.querySelectorAll(
-          'ytd-rich-item-renderer a#video-title-link',
+        'ytd-rich-item-renderer a#video-title-link',
       ),
       highlightClass: 'wsn-youtube-focused-video',
       highlightedElementSelector: (n) => n.closest('ytd-rich-item-renderer'),
       containerSelector: (n) => n.closest('ytd-rich-item-renderer'),
     };
     const results = getSortedSearchResults(
-        [...includedElements, homePageElements],
-        [],
+      [...includedElements, homePageElements],
+      [],
     );
     // When navigating away from the home page, the home page elements are still
     // in the DOM but they are not visible, so we must check if they are
     // visible (using offsetParent), not just if they are present.
     const isHomePage = Array.from(homePageElements.nodes).some(
-        (n) => n.offsetParent != null,
+      (n) => n.offsetParent != null,
     );
     const gridRow = document.querySelector('ytd-rich-grid-row');
     if (isHomePage && gridRow != null) {
       results.itemsPerRow = gridRow.getElementsByTagName(
-          'ytd-rich-item-renderer',
+        'ytd-rich-item-renderer',
       ).length;
       results.gridNavigation = results.itemsPerRow > 0;
     }
@@ -1930,14 +2729,14 @@ class YouTube {
   changeTools(period) {
     if (!document.querySelector('div#collapse-content')) {
       const toggleButton = document.querySelectorAll(
-          'a.ytd-toggle-button-renderer',
+        'a.ytd-toggle-button-renderer',
       )[0];
       // Toggling the buttons ensures that div#collapse-content is loaded
       toggleButton.click();
       toggleButton.click();
     }
     const forms = document.querySelectorAll(
-        'div#collapse-content > *:first-of-type ytd-search-filter-renderer',
+      'div#collapse-content > *:first-of-type ytd-search-filter-renderer',
     );
     let neededForm = null;
     switch (period) {
@@ -1984,7 +2783,7 @@ class GoogleScholar {
       },
       {
         nodes: document.querySelectorAll(
-            '.gs_ico_nav_previous, .gs_ico_nav_next',
+          '.gs_ico_nav_previous, .gs_ico_nav_next',
         ),
         anchorSelector: (n) => n.parentElement,
         highlightClass: 'wsn-google-scholar-next-page',
@@ -2029,9 +2828,9 @@ class Amazon {
       return;
     }
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          callback(false);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        callback(false);
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -2045,7 +2844,7 @@ class Amazon {
       // Carousel items
       {
         nodes: document.querySelectorAll(
-            '.s-main-slot .a-carousel-card h2 .a-link-normal.a-text-normal',
+          '.s-main-slot .a-carousel-card h2 .a-link-normal.a-text-normal',
         ),
         highlightedElementSelector: (n) => n.closest('.a-carousel-card'),
         highlightClass: 'wsn-amazon-focused-carousel-item',
@@ -2056,7 +2855,7 @@ class Amazon {
       // more general.
       {
         nodes: document.querySelectorAll(
-            '.s-main-slot h2 .a-link-normal.a-text-normal',
+          '.s-main-slot h2 .a-link-normal.a-text-normal',
         ),
         // highlightedElementSelector: (n) => n.parentElement.children[1],
         highlightedElementSelector: (n) =>
@@ -2073,7 +2872,7 @@ class Amazon {
       // Shopping card items
       {
         nodes: document.querySelectorAll(
-            '.sc-list-item-content .a-list-item .a-link-normal',
+          '.sc-list-item-content .a-list-item .a-link-normal',
         ),
         highlightClass: 'wsn-amazon-focused-cart-item',
         highlightedElementSelector: (n) => n.closest('.sc-list-item-content'),
@@ -2084,7 +2883,7 @@ class Amazon {
     // TODO: The hidden carousel elements do not match at page load because
     // they don't yet have the aria-hidden property set.
     const excludedElements = document.querySelectorAll(
-        '.a-pagination .a-selected a, .a-carousel-card[aria-hidden="true"] a',
+      '.a-pagination .a-selected a, .a-carousel-card[aria-hidden="true"] a',
     );
     return getSortedSearchResults(includedElements, excludedElements);
   }
@@ -2114,7 +2913,7 @@ class Github {
 
   static #getCommitSearchLinks() {
     const commitsContainers = document.querySelectorAll(
-        '#commit_search_results .text-normal',
+      '#commit_search_results .text-normal',
     );
     const commits = [];
     for (const con of commitsContainers) {
@@ -2126,7 +2925,7 @@ class Github {
         commits.push(links[0]);
       } else {
         const prLink = con.querySelector(
-            'a[data-hovercard-type="pull_request"]',
+          'a[data-hovercard-type="pull_request"]',
         );
         if (prLink != null) {
           commits.push(prLink);
@@ -2157,21 +2956,21 @@ class Github {
       // Issues
       {
         nodes: document.querySelectorAll(
-            '#issue_search_results .text-normal a',
+          '#issue_search_results .text-normal a',
         ),
         highlightClass: 'wsn-github-focused-item',
       },
       // Marketplace
       {
         nodes: document.querySelectorAll(
-            '#marketplace_search_results .text-normal a',
+          '#marketplace_search_results .text-normal a',
         ),
         highlightClass: 'wsn-github-focused-item',
       },
       // Topics
       {
         nodes: document.querySelectorAll(
-            '#topic_search_results .text-normal a',
+          '#topic_search_results .text-normal a',
         ),
         highlightClass: 'wsn-github-focused-item',
       },
@@ -2188,7 +2987,7 @@ class Github {
       // Pinned repos in user profile
       {
         nodes: document.querySelectorAll(
-            '.pinned-item-list-item-content span.repo',
+          '.pinned-item-list-item-content span.repo',
         ),
         highlightClass: 'wsn-github-focused-item',
         highlightedElementSelector: (n) => n.closest('a'),
@@ -2198,7 +2997,7 @@ class Github {
       // Personal repos list in user profile
       {
         nodes: document.querySelectorAll(
-            '#user-repositories-list a[itemprop*="codeRepository"]',
+          '#user-repositories-list a[itemprop*="codeRepository"]',
         ),
         highlightClass: 'wsn-github-focused-item',
         containerSelector: (n) => n.closest('li') || n,
@@ -2238,14 +3037,14 @@ class Github {
     // next page of results).
     let lastURL = window.location.href;
     const observer = new MutationObserver(
-        debounce((mutationsList, observer) => {
-          let appendOnly = true;
-          if (window.location.href !== lastURL) {
-            lastURL = window.location.href;
-            appendOnly = false;
-          }
-          callback(appendOnly);
-        }, 50),
+      debounce((mutationsList, observer) => {
+        let appendOnly = true;
+        if (window.location.href !== lastURL) {
+          lastURL = window.location.href;
+          appendOnly = false;
+        }
+        callback(appendOnly);
+      }, 50),
     );
     observer.observe(container, {
       attributes: false,
@@ -2276,14 +3075,14 @@ class Gitlab {
 
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('header.navbar'),
-        element,
+      document.querySelector('header.navbar'),
+      element,
     );
   }
 
   onChangedResults(callback) {
     const containers = document.querySelectorAll(
-        '.projects-list, .groups-list, #content-body',
+      '.projects-list, .groups-list, #content-body',
     );
     const observer = new MutationObserver(async (mutationsList, observer) => {
       callback(true);
@@ -2309,7 +3108,7 @@ class Gitlab {
       // https://gitlab.archlinux.org/archlinux
       {
         nodes: document.querySelectorAll(
-            'ul.groups-list li.group-row a[aria-label]',
+          'ul.groups-list li.group-row a[aria-label]',
         ),
         containerSelector: (n) => n.closest('li.group-row'),
         highlightedElementSelector: (n) => n.closest('li.group-row'),
@@ -2544,7 +3343,7 @@ class SearchResultsManager {
     // We already scroll below, so no need for focus to scroll. The scrolling
     // behavior of `focus` also seems less predictable and caused an issue, see:
     // https://github.com/infokiller/web-search-navigator/issues/35
-    searchResult.anchor.focus({preventScroll: true});
+    searchResult.anchor.focus({ preventScroll: true });
     // Ensure whole search result container is visible in the viewport, not only
     // the search result link.
     if (scroll !== FOCUS_SCROLL_OFF) {
@@ -2592,7 +3391,7 @@ class SearchResultsManager {
       const focusedRowIndex =
         this.focusedIndex % this.searchResults.itemsPerRow;
       this.focus(
-          this.searchResults -
+        this.searchResults -
           1 -
           this.searchResults.itemsPerRow +
           focusedRowIndex,
@@ -2606,7 +3405,7 @@ class SearchResultsManager {
 class WebSearchNavigator {
   constructor() {
     this.bindings = [];
-    this.bindingsToggle = {active: true};
+    this.bindingsToggle = { active: true };
   }
 
   async init() {
@@ -2651,13 +3450,13 @@ class WebSearchNavigator {
     this.initTabsNavigation();
     this.initChangeToolsNavigation();
     this.initSearchInputNavigation();
-    this.bindingsToggle = {active: true};
+    this.bindingsToggle = { active: true };
     bindKeys(this.bindings, this.bindingsToggle);
   }
 
   initSearchInputNavigation() {
     let searchInput = document.querySelector(
-        this.searchEngine.searchBoxSelector,
+      this.searchEngine.searchBoxSelector,
     );
     if (searchInput == null) {
       return;
@@ -2721,8 +3520,8 @@ class WebSearchNavigator {
         // it's clear to the user that it has focus.
         scrollToElement(this.searchEngine, searchInput);
         searchInput.setSelectionRange(
-            searchInput.value.length,
-            searchInput.value.length,
+          searchInput.value.length,
+          searchInput.value.length,
         );
         return false;
       }
@@ -2740,8 +3539,8 @@ class WebSearchNavigator {
       return true;
     };
     this.register(
-        this.options.sync.get('focusSearchInput'),
-        outsideSearchboxHandler,
+      this.options.sync.get('focusSearchInput'),
+      outsideSearchboxHandler,
     );
     // Bind globally, otherwise Mousetrap ignores keypresses inside inputs.
     // We must bind it separately to the search box element, or otherwise the
@@ -2749,10 +3548,10 @@ class WebSearchNavigator {
     // Google Search as of 2020-06-22), presumably because the javascript in the
     // page will disable further processing.
     this.register(
-        this.options.sync.get('focusSearchInput'),
-        insideSearchboxHandler,
-        searchInput,
-        true,
+      this.options.sync.get('focusSearchInput'),
+      insideSearchboxHandler,
+      searchInput,
+      true,
     );
   }
 
@@ -2828,8 +3627,8 @@ class WebSearchNavigator {
       }
     }
     this.resultsManager = new SearchResultsManager(
-        this.searchEngine,
-        this.options,
+      this.searchEngine,
+      this.options,
     );
     this.resultsManager.reloadSearchResults();
   }
@@ -2852,31 +3651,31 @@ class WebSearchNavigator {
 
     if (!gridNavigation) {
       this.register(
-          getOpt('nextKey'),
-          onFocusChange(this.resultsManager.focusNext),
+        getOpt('nextKey'),
+        onFocusChange(this.resultsManager.focusNext),
       );
       this.register(
-          getOpt('previousKey'),
-          onFocusChange(this.resultsManager.focusPrevious),
+        getOpt('previousKey'),
+        onFocusChange(this.resultsManager.focusPrevious),
       );
     } else {
       this.register(
-          getOpt('nextKey'),
-          onFocusChange(this.resultsManager.focusDown),
+        getOpt('nextKey'),
+        onFocusChange(this.resultsManager.focusDown),
       );
       this.register(
-          getOpt('previousKey'),
-          onFocusChange(this.resultsManager.focusUp),
+        getOpt('previousKey'),
+        onFocusChange(this.resultsManager.focusUp),
       );
       // Left
       this.register(
-          getOpt('navigatePreviousResultPage'),
-          onFocusChange(this.resultsManager.focusPrevious),
+        getOpt('navigatePreviousResultPage'),
+        onFocusChange(this.resultsManager.focusPrevious),
       );
       // Right
       this.register(
-          getOpt('navigateNextResultPage'),
-          onFocusChange(this.resultsManager.focusNext),
+        getOpt('navigateNextResultPage'),
+        onFocusChange(this.resultsManager.focusNext),
       );
     }
     this.register(getOpt('navigateKey'), () => {
@@ -2928,8 +3727,8 @@ class WebSearchNavigator {
           clientY: link.getBoundingClientRect().y,
         };
         const middleClickMousedown = new MouseEvent(
-            'mousedown',
-            mouseEventParams,
+          'mousedown',
+          mouseEventParams,
         );
         link.dispatchEvent(middleClickMousedown);
         const middleClickMouseup = new MouseEvent('mouseup', mouseEventParams);
@@ -2947,14 +3746,16 @@ class WebSearchNavigator {
     this.register(getOpt('copyUrlKey'), () => {
       const link = this.resultsManager.getElementToNavigate();
       if (
-        link == null || link.localName !== 'a' || !link.href ||
+        link == null ||
+        link.localName !== 'a' ||
+        !link.href ||
         !navigator.clipboard
       ) {
         return true;
       }
       navigator.clipboard.writeText(link.href).then(
-          () => false,
-          (err) => true,
+        () => false,
+        (err) => true,
       );
     });
   }
@@ -3010,8 +3811,6 @@ class WebSearchNavigator {
 
 const extension = new WebSearchNavigator();
 extension.init();
-
-
 
 // Some weird escaping things going on
 const NEWLINE = String.fromCharCode(10);

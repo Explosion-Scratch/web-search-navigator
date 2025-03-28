@@ -186,7 +186,7 @@ class SearchResultsManager {
     // We already scroll below, so no need for focus to scroll. The scrolling
     // behavior of `focus` also seems less predictable and caused an issue, see:
     // https://github.com/infokiller/web-search-navigator/issues/35
-    searchResult.anchor.focus({preventScroll: true});
+    searchResult.anchor.focus({ preventScroll: true });
     // Ensure whole search result container is visible in the viewport, not only
     // the search result link.
     if (scroll !== FOCUS_SCROLL_OFF) {
@@ -234,7 +234,7 @@ class SearchResultsManager {
       const focusedRowIndex =
         this.focusedIndex % this.searchResults.itemsPerRow;
       this.focus(
-          this.searchResults -
+        this.searchResults -
           1 -
           this.searchResults.itemsPerRow +
           focusedRowIndex,
@@ -248,7 +248,7 @@ class SearchResultsManager {
 class WebSearchNavigator {
   constructor() {
     this.bindings = [];
-    this.bindingsToggle = {active: true};
+    this.bindingsToggle = { active: true };
   }
 
   async init() {
@@ -293,13 +293,13 @@ class WebSearchNavigator {
     this.initTabsNavigation();
     this.initChangeToolsNavigation();
     this.initSearchInputNavigation();
-    this.bindingsToggle = {active: true};
+    this.bindingsToggle = { active: true };
     bindKeys(this.bindings, this.bindingsToggle);
   }
 
   initSearchInputNavigation() {
     let searchInput = document.querySelector(
-        this.searchEngine.searchBoxSelector,
+      this.searchEngine.searchBoxSelector,
     );
     if (searchInput == null) {
       return;
@@ -363,8 +363,8 @@ class WebSearchNavigator {
         // it's clear to the user that it has focus.
         scrollToElement(this.searchEngine, searchInput);
         searchInput.setSelectionRange(
-            searchInput.value.length,
-            searchInput.value.length,
+          searchInput.value.length,
+          searchInput.value.length,
         );
         return false;
       }
@@ -382,8 +382,8 @@ class WebSearchNavigator {
       return true;
     };
     this.register(
-        this.options.sync.get('focusSearchInput'),
-        outsideSearchboxHandler,
+      this.options.sync.get('focusSearchInput'),
+      outsideSearchboxHandler,
     );
     // Bind globally, otherwise Mousetrap ignores keypresses inside inputs.
     // We must bind it separately to the search box element, or otherwise the
@@ -391,10 +391,10 @@ class WebSearchNavigator {
     // Google Search as of 2020-06-22), presumably because the javascript in the
     // page will disable further processing.
     this.register(
-        this.options.sync.get('focusSearchInput'),
-        insideSearchboxHandler,
-        searchInput,
-        true,
+      this.options.sync.get('focusSearchInput'),
+      insideSearchboxHandler,
+      searchInput,
+      true,
     );
   }
 
@@ -470,8 +470,8 @@ class WebSearchNavigator {
       }
     }
     this.resultsManager = new SearchResultsManager(
-        this.searchEngine,
-        this.options,
+      this.searchEngine,
+      this.options,
     );
     this.resultsManager.reloadSearchResults();
   }
@@ -494,31 +494,31 @@ class WebSearchNavigator {
 
     if (!gridNavigation) {
       this.register(
-          getOpt('nextKey'),
-          onFocusChange(this.resultsManager.focusNext),
+        getOpt('nextKey'),
+        onFocusChange(this.resultsManager.focusNext),
       );
       this.register(
-          getOpt('previousKey'),
-          onFocusChange(this.resultsManager.focusPrevious),
+        getOpt('previousKey'),
+        onFocusChange(this.resultsManager.focusPrevious),
       );
     } else {
       this.register(
-          getOpt('nextKey'),
-          onFocusChange(this.resultsManager.focusDown),
+        getOpt('nextKey'),
+        onFocusChange(this.resultsManager.focusDown),
       );
       this.register(
-          getOpt('previousKey'),
-          onFocusChange(this.resultsManager.focusUp),
+        getOpt('previousKey'),
+        onFocusChange(this.resultsManager.focusUp),
       );
       // Left
       this.register(
-          getOpt('navigatePreviousResultPage'),
-          onFocusChange(this.resultsManager.focusPrevious),
+        getOpt('navigatePreviousResultPage'),
+        onFocusChange(this.resultsManager.focusPrevious),
       );
       // Right
       this.register(
-          getOpt('navigateNextResultPage'),
-          onFocusChange(this.resultsManager.focusNext),
+        getOpt('navigateNextResultPage'),
+        onFocusChange(this.resultsManager.focusNext),
       );
     }
     this.register(getOpt('navigateKey'), () => {
@@ -570,8 +570,8 @@ class WebSearchNavigator {
           clientY: link.getBoundingClientRect().y,
         };
         const middleClickMousedown = new MouseEvent(
-            'mousedown',
-            mouseEventParams,
+          'mousedown',
+          mouseEventParams,
         );
         link.dispatchEvent(middleClickMousedown);
         const middleClickMouseup = new MouseEvent('mouseup', mouseEventParams);
@@ -589,14 +589,16 @@ class WebSearchNavigator {
     this.register(getOpt('copyUrlKey'), () => {
       const link = this.resultsManager.getElementToNavigate();
       if (
-        link == null || link.localName !== 'a' || !link.href ||
+        link == null ||
+        link.localName !== 'a' ||
+        !link.href ||
         !navigator.clipboard
       ) {
         return true;
       }
       navigator.clipboard.writeText(link.href).then(
-          () => false,
-          (err) => true,
+        () => false,
+        (err) => true,
       );
     });
   }

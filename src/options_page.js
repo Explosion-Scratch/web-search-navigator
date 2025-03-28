@@ -4,26 +4,199 @@
 /* global createSyncedOptions, DEFAULT_CSS */
 
 const GOOGLE_DOMAINS = [
-  'ad', 'ae', 'al', 'am', 'as', 'at', 'az', 'ba', 'be', 'bf', 'bg', 'bi', 'bj',
-  'bs', 'bt', 'by', 'ca', 'cat', 'cd', 'cf', 'cg', 'ch', 'ci', 'cl', 'cm', 'cn',
-  'co.ao', 'co.bw', 'co.ck', 'co.cr', 'co.id', 'co.il', 'co.in', 'co.jp',
-  'co.ke', 'co.kr', 'co.ls', 'co.ma', 'co.mz', 'co.nz', 'co.th', 'co.tz',
-  'co.ug', 'co.uk', 'co.uz', 'co.ve', 'co.vi', 'co.za', 'co.zm', 'co.zw', 'com',
-  'com.af', 'com.ag', 'com.ai', 'com.ar', 'com.au', 'com.bd', 'com.bh',
-  'com.bn', 'com.bo', 'com.br', 'com.bz', 'com.co', 'com.cu', 'com.cy',
-  'com.do', 'com.ec', 'com.eg', 'com.et', 'com.fj', 'com.gh', 'com.gi',
-  'com.gt', 'com.hk', 'com.jm', 'com.kh', 'com.kw', 'com.lb', 'com.ly',
-  'com.mm', 'com.mt', 'com.mx', 'com.my', 'com.na', 'com.nf', 'com.ng',
-  'com.ni', 'com.np', 'com.om', 'com.pa', 'com.pe', 'com.pg', 'com.ph',
-  'com.pk', 'com.pr', 'com.py', 'com.qa', 'com.sa', 'com.sb', 'com.sg',
-  'com.sl', 'com.sv', 'com.tj', 'com.tr', 'com.tw', 'com.ua', 'com.uy',
-  'com.vc', 'com.vn', 'cv', 'cz', 'de', 'dj', 'dk', 'dm', 'dz', 'ee', 'es',
-  'fi', 'fm', 'fr', 'ga', 'ge', 'gg', 'gl', 'gm', 'gp', 'gr', 'gy', 'hn', 'hr',
-  'ht', 'hu', 'ie', 'im', 'iq', 'is', 'it', 'je', 'jo', 'kg', 'ki', 'kz', 'la',
-  'li', 'lk', 'lt', 'lu', 'lv', 'md', 'me', 'mg', 'mk', 'ml', 'mn', 'ms', 'mu',
-  'mv', 'mw', 'ne', 'nl', 'no', 'nr', 'nu', 'pl', 'pn', 'ps', 'pt', 'ro', 'rs',
-  'ru', 'rw', 'sc', 'se', 'sh', 'si', 'sk', 'sm', 'sn', 'so', 'sr', 'st', 'td',
-  'tg', 'tk', 'tl', 'tm', 'tn', 'to', 'tt', 'vg', 'vu', 'ws',
+  'ad',
+  'ae',
+  'al',
+  'am',
+  'as',
+  'at',
+  'az',
+  'ba',
+  'be',
+  'bf',
+  'bg',
+  'bi',
+  'bj',
+  'bs',
+  'bt',
+  'by',
+  'ca',
+  'cat',
+  'cd',
+  'cf',
+  'cg',
+  'ch',
+  'ci',
+  'cl',
+  'cm',
+  'cn',
+  'co.ao',
+  'co.bw',
+  'co.ck',
+  'co.cr',
+  'co.id',
+  'co.il',
+  'co.in',
+  'co.jp',
+  'co.ke',
+  'co.kr',
+  'co.ls',
+  'co.ma',
+  'co.mz',
+  'co.nz',
+  'co.th',
+  'co.tz',
+  'co.ug',
+  'co.uk',
+  'co.uz',
+  'co.ve',
+  'co.vi',
+  'co.za',
+  'co.zm',
+  'co.zw',
+  'com',
+  'com.af',
+  'com.ag',
+  'com.ai',
+  'com.ar',
+  'com.au',
+  'com.bd',
+  'com.bh',
+  'com.bn',
+  'com.bo',
+  'com.br',
+  'com.bz',
+  'com.co',
+  'com.cu',
+  'com.cy',
+  'com.do',
+  'com.ec',
+  'com.eg',
+  'com.et',
+  'com.fj',
+  'com.gh',
+  'com.gi',
+  'com.gt',
+  'com.hk',
+  'com.jm',
+  'com.kh',
+  'com.kw',
+  'com.lb',
+  'com.ly',
+  'com.mm',
+  'com.mt',
+  'com.mx',
+  'com.my',
+  'com.na',
+  'com.nf',
+  'com.ng',
+  'com.ni',
+  'com.np',
+  'com.om',
+  'com.pa',
+  'com.pe',
+  'com.pg',
+  'com.ph',
+  'com.pk',
+  'com.pr',
+  'com.py',
+  'com.qa',
+  'com.sa',
+  'com.sb',
+  'com.sg',
+  'com.sl',
+  'com.sv',
+  'com.tj',
+  'com.tr',
+  'com.tw',
+  'com.ua',
+  'com.uy',
+  'com.vc',
+  'com.vn',
+  'cv',
+  'cz',
+  'de',
+  'dj',
+  'dk',
+  'dm',
+  'dz',
+  'ee',
+  'es',
+  'fi',
+  'fm',
+  'fr',
+  'ga',
+  'ge',
+  'gg',
+  'gl',
+  'gm',
+  'gp',
+  'gr',
+  'gy',
+  'hn',
+  'hr',
+  'ht',
+  'hu',
+  'ie',
+  'im',
+  'iq',
+  'is',
+  'it',
+  'je',
+  'jo',
+  'kg',
+  'ki',
+  'kz',
+  'la',
+  'li',
+  'lk',
+  'lt',
+  'lu',
+  'lv',
+  'md',
+  'me',
+  'mg',
+  'mk',
+  'ml',
+  'mn',
+  'ms',
+  'mu',
+  'mv',
+  'mw',
+  'ne',
+  'nl',
+  'no',
+  'nr',
+  'nu',
+  'pl',
+  'pn',
+  'ps',
+  'pt',
+  'ro',
+  'rs',
+  'ru',
+  'rw',
+  'sc',
+  'se',
+  'sh',
+  'si',
+  'sk',
+  'sm',
+  'sn',
+  'so',
+  'sr',
+  'st',
+  'td',
+  'tg',
+  'tk',
+  'tl',
+  'tm',
+  'tn',
+  'to',
+  'tt',
+  'vg',
+  'vu',
+  'ws',
 ];
 
 const AMAZON_DOMAINS = [
@@ -54,7 +227,7 @@ const generateURLPatterns = (prefix, domains, suffix) => {
 // Authorized urls for compatible search engines
 const OPTIONAL_PERMISSIONS_URLS = {
   'brave-search': ['https://search.brave.com/*'],
-  'startpage': [
+  startpage: [
     // It used to be 'https://www.startpage.com/*/*search*' but when requesting
     // this URL chrome actually grants permission to the URL below. This
     // discrepancy causes the options page to think that we don't have
@@ -62,21 +235,21 @@ const OPTIONAL_PERMISSIONS_URLS = {
     'https://www.startpage.com/*',
     'https://startpage.com/*',
   ],
-  'youtube': ['https://www.youtube.com/*'],
+  youtube: ['https://www.youtube.com/*'],
   'google-scholar': generateURLPatterns(
-      'https://scholar.google',
-      GOOGLE_DOMAINS,
-      '/*',
+    'https://scholar.google',
+    GOOGLE_DOMAINS,
+    '/*',
   ),
-  'github': ['https://github.com/*'],
-  'amazon': generateURLPatterns('https://www.amazon', AMAZON_DOMAINS, '/*'),
-  'gitlab': ['https://gitlab.com/*'],
+  github: ['https://github.com/*'],
+  amazon: generateURLPatterns('https://www.amazon', AMAZON_DOMAINS, '/*'),
+  gitlab: ['https://gitlab.com/*'],
   'custom-gitlab': ['https://*/*'],
 };
 
 globalThis._browser_userscript_polyfill.permissions.getAll = () => ({
   origins: Object.values(OPTIONAL_PERMISSIONS_URLS).flat(),
-})
+});
 
 const KEYBINDING_TO_DIV = {
   nextKey: 'next-key',
@@ -118,10 +291,10 @@ const setSearchEnginePermission_ = async (checkbox) => {
   const urls = OPTIONAL_PERMISSIONS_URLS[checkbox.id];
   if (checkbox.checked) {
     checkbox.checked = false;
-    const granted = await browser.permissions.request({origins: urls});
+    const granted = await browser.permissions.request({ origins: urls });
     checkbox.checked = granted;
   } else {
-    browser.permissions.remove({origins: urls});
+    browser.permissions.remove({ origins: urls });
   }
 };
 
@@ -181,34 +354,34 @@ class OptionsPageManager {
     };
     // Handle non-keybindings settings first
     setOpt(
-        'wrapNavigation',
-        document.getElementById('wrap-navigation').checked,
+      'wrapNavigation',
+      document.getElementById('wrap-navigation').checked,
     );
     setOpt(
-        'autoSelectFirst',
-        document.getElementById('auto-select-first').checked,
+      'autoSelectFirst',
+      document.getElementById('auto-select-first').checked,
     );
     setOpt('hideOutline', document.getElementById('hide-outline').checked);
     setOpt('delay', document.getElementById('delay').value);
     setOpt(
-        'googleIncludeCards',
-        document.getElementById('google-include-cards').checked,
+      'googleIncludeCards',
+      document.getElementById('google-include-cards').checked,
     );
     setOpt(
-        'googleIncludeMemex',
-        document.getElementById('google-include-memex').checked,
+      'googleIncludeMemex',
+      document.getElementById('google-include-memex').checked,
     );
     setOpt(
-        'googleIncludePlaces',
-        document.getElementById('google-include-places').checked,
+      'googleIncludePlaces',
+      document.getElementById('google-include-places').checked,
     );
     // Handle keybinding options
     for (const [key, optName] of Object.entries(KEYBINDING_TO_DIV)) {
       // Keybindings are stored internally as arrays, but edited by users as
       // comman delimited strings.
       setOpt(
-          key,
-          keybindingStringToArray(document.getElementById(optName).value),
+        key,
+        keybindingStringToArray(document.getElementById(optName).value),
       );
     }
     const customCSS = document.getElementById('custom-css-textarea').value;
@@ -220,15 +393,15 @@ class OptionsPageManager {
       }
     }
     setOpt(
-        'simulateMiddleClick',
-        document.getElementById('simulate-middle-click').checked,
+      'simulateMiddleClick',
+      document.getElementById('simulate-middle-click').checked,
     );
     const gitlabURLRegex = document.getElementById('custom-gitlab-url').value;
     try {
       new RegExp(gitlabURLRegex);
       setOpt(
-          'customGitlabUrl',
-          document.getElementById('custom-gitlab-url').value,
+        'customGitlabUrl',
+        document.getElementById('custom-gitlab-url').value,
       );
     } catch (e) {
       const status = document.getElementById('status');
@@ -247,9 +420,9 @@ class OptionsPageManager {
     // Check what URLs we have permission for.
     const braveSearch = document.getElementById('brave-search');
     braveSearch.checked = OPTIONAL_PERMISSIONS_URLS['brave-search'].every(
-        (url) => {
-          return permissions.origins.includes(url);
-        },
+      (url) => {
+        return permissions.origins.includes(url);
+      },
     );
     const startpage = document.getElementById('startpage');
     startpage.checked = OPTIONAL_PERMISSIONS_URLS['startpage'].every((url) => {
@@ -261,9 +434,9 @@ class OptionsPageManager {
     });
     const googleScholar = document.getElementById('google-scholar');
     googleScholar.checked = OPTIONAL_PERMISSIONS_URLS['google-scholar'].every(
-        (url) => {
-          return permissions.origins.includes(url);
-        },
+      (url) => {
+        return permissions.origins.includes(url);
+      },
     );
     const amazon = document.getElementById('amazon');
     amazon.checked = OPTIONAL_PERMISSIONS_URLS['amazon'].every((url) => {
@@ -279,9 +452,9 @@ class OptionsPageManager {
     });
     const customGitlab = document.getElementById('custom-gitlab');
     customGitlab.checked = OPTIONAL_PERMISSIONS_URLS['custom-gitlab'].every(
-        (url) => {
-          return permissions.origins.includes(url);
-        },
+      (url) => {
+        return permissions.origins.includes(url);
+      },
     );
   }
 
@@ -310,20 +483,20 @@ class OptionsPageManager {
     document.getElementById('google-include-memex').checked =
       getOpt('googleIncludeMemex');
     document.getElementById('google-include-places').checked = getOpt(
-        'googleIncludePlaces',
+      'googleIncludePlaces',
     );
     // Restore options from divs.
     for (const [key, optName] of Object.entries(KEYBINDING_TO_DIV)) {
       // Keybindings are stored internally as arrays, but edited by users as
       // comman delimited strings.
       document.getElementById(optName).value = keybindingArrayToString(
-          getOpt(key),
+        getOpt(key),
       );
     }
     // Load custom CSS
     document.getElementById('custom-css-textarea').value = getOpt('customCSS');
     document.getElementById('simulate-middle-click').checked = getOpt(
-        'simulateMiddleClick',
+      'simulateMiddleClick',
     );
   }
 
