@@ -262,8 +262,111 @@ class WebSearchNavigator {
       return new Promise((resolve) => setTimeout(resolve, milliseconds));
     };
     await sleep(this.options.sync.get('delay'));
+    this.alterResults();
     this.injectCSS();
     this.initKeybindings();
+  }
+
+  alterResults() {
+    const BOOST_URLS = [
+      'merriam-webster.com',
+      'wikipedia',
+      '.gov',
+      '.edu',
+      'chromewebstore.google.com',
+    ];
+    const BOOST_AMOUNT = 3;
+    const BLACKLIST_URLS = ['pinterest.com'];
+    const PIN_URLS = ['github.com', 'github.io'];
+    const ICONS = {
+      pin: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --><path fill="currentColor" d="M182 72a54 54 0 1 0-60 53.66V232a6 6 0 0 0 12 0V125.66A54.07 54.07 0 0 0 182 72m-54 42a42 42 0 1 1 42-42a42 42 0 0 1-42 42"/></svg>`,
+      boost: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --><path fill="currentColor" d="m228.24 115.76l-96-96a6 6 0 0 0-8.48 0l-96 96A6 6 0 0 0 32 126h42v82a14 14 0 0 0 14 14h80a14 14 0 0 0 14-14v-82h42a6 6 0 0 0 4.24-10.24M176 114a6 6 0 0 0-6 6v88a2 2 0 0 1-2 2H88a2 2 0 0 1-2-2v-88a6 6 0 0 0-6-6H46.49L128 32.49L209.51 114Z"/></svg>`,
+    };
+    let results = this.searchEngine.getSearchResults();
+    const ref = () => (results = this.searchEngine.getSearchResults());
+    function swapNodes(n1, n2) {
+      var p1 = n1.parentNode;
+      var p2 = n2.parentNode;
+      var i1, i2;
+
+      if (!p1 || !p2 || p1.isEqualNode(n2) || p2.isEqualNode(n1)) return;
+
+      for (var i = 0; i < p1.children.length; i++) {
+        if (p1.children[i].isEqualNode(n1)) {
+          i1 = i;
+        }
+      }
+      for (var i = 0; i < p2.children.length; i++) {
+        if (p2.children[i].isEqualNode(n2)) {
+          i2 = i;
+        }
+      }
+
+      if (p1.isEqualNode(p2) && i1 < i2) {
+        i2++;
+      }
+      p1.insertBefore(n2, p1.children[i1]);
+      p2.insertBefore(n1, p2.children[i2]);
+    }
+
+    // const swapResults = (idx1, idx2) => {
+    //   if (!results[idx1] || !results[idx2]) return;
+    //   const temp = results[idx1];
+    //   results[idx1] = results[idx2];
+    //   results[idx2] = temp;
+    //   swapNodes(results[idx1].container, results[idx2].container);
+    // };
+    const moveResultTo = (result, newindex) => {
+      results[newindex].container.parentElement.insertBefore(
+        result.container,
+        results[newindex].container,
+      );
+      results.splice(newindex, 0, result);
+    };
+    const matches = (arr, res) => arr.find((i) => res.anchor.href.includes(i));
+    const toOperate = {};
+    for (let [index, result] of Object.entries(
+      results.filter((i) => i?.anchor?.href && i?.container),
+    )) {
+      const status = matches(BLACKLIST_URLS, result)
+        ? 'blacklist'
+        : matches(PIN_URLS, result)
+          ? 'pin'
+          : matches(BOOST_URLS, result)
+            ? 'boost'
+            : 'normal';
+      toOperate[status] = toOperate[status] || [];
+      toOperate[status].push(result);
+      result.container.classList.add('result-' + status);
+      if (!['normal', 'blacklist'].includes(status)) {
+        const s = document.createElement('span');
+        s.innerHTML = `(${ICONS[status].replaceAll('="32"', '="16"')} ${status[0].toUpperCase()}${status.slice(1)})`;
+        Object.assign(s.style, {
+          fontSize: '.8em',
+          color: '#777',
+          marginLeft: '5px',
+          display: 'inline-flex',
+          alignItems: 'center',
+        });
+        result.anchor.appendChild(s);
+      }
+    }
+    toOperate.boost?.forEach((r, idx) =>
+      moveResultTo(r, Math.max(0, idx - BOOST_AMOUNT)),
+    );
+    toOperate.blacklist?.forEach((r) => r.container.remove());
+    let resultPin = [];
+    PIN_URLS.reverse().forEach((pinUrl) => {
+      const pinnedForUrl = toOperate.pin?.filter((r) =>
+        r.anchor.href.includes(pinUrl),
+      );
+      pinnedForUrl?.forEach((r) => {
+        toOperate.pin.splice(toOperate.pin.indexOf(r), 1); // Remove from original array to avoid duplicates
+        toOperate.pin.push(r); // Re-add to maintain order for later processing if needed, though not used here
+        moveResultTo(r, 0);
+      });
+    });
+    resultPin.forEach((r) => moveResultTo(r, 0));
   }
 
   injectCSS() {
